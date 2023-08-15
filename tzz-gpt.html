@@ -1,0 +1,47 @@
+<script type="module">
+   import Chatbot from "https://cdn.jsdelivr.net/gh/toolzzlabzz/FlowiseChatEmbed/dist/web.js"
+    Chatbot.init({
+        chatflowid: "00c54afd-2889-4041-932d-cc92ed07ab74",
+        apiHost: "https://tzz-flowai.onrender.com",
+        chatflowConfig: {
+            // topK: 2
+        },
+        theme: {
+            button: {
+                backgroundColor: "00000",
+                right: 20,
+                bottom: 20,
+                size: "medium",
+                iconColor: "white",
+                customIconSrc: "https://media.discordapp.net/attachments/915691669234548746/1140026064245116948/Frame_4_3.png",
+            },
+            chatWindow: {
+                welcomeMessage: "Olá, eu sou o ToolzzGPT, como posso te ajudar?",
+                backgroundColor: "#ffffff",
+                height: 700,
+                width: 400,
+                fontSize: 16,
+                poweredByTextColor: "#303235",
+                botMessage: {
+                    backgroundColor: "#f7f8ff",
+                    textColor: "#303235",
+                    showAvatar: true,
+                    avatarSrc: "https://media.discordapp.net/attachments/915691669234548746/1140024637741342850/Frame_4.png",
+                },
+                userMessage: {
+                    backgroundColor: "00000",
+                    textColor: "#ffffff",
+                    showAvatar: false,
+                    avatarSrc: "https://cdn-icons-png.flaticon.com/512/10337/10337609.png",
+                },
+                textInput: {
+                    placeholder: "Digite sua mensagem aqui",
+                    backgroundColor: "#ffffff",
+                    textColor: "#303235",
+                    sendButtonColor: "#3B81F6",
+                }
+            }
+        }
+    })
+</script>
+

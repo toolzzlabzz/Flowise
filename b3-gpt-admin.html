@@ -1,0 +1,47 @@
+<script type="module">
+   import Chatbot from "https://cdn.jsdelivr.net/gh/toolzzlabzz/FlowiseChatEmbed/dist/web.js"
+    Chatbot.init({
+        chatflowid: "27d87f02-62dc-4930-9483-0c016be5e1cf",
+        apiHost: "https://tzz-flowai.onrender.com",
+        chatflowConfig: {
+            // topK: 2
+        },
+        theme: {
+            button: {
+                backgroundColor: "#083577",
+                right: 20,
+                bottom: 20,
+                size: "medium",
+                iconColor: "white",
+                customIconSrc: "https://media.discordapp.net/attachments/915691669234548746/1139839372120838194/Frame_1_6.png?width=666&height=671",
+            },
+            chatWindow: {
+                welcomeMessage: "Olá Admin, eu sou o B3-GPT - seu assistente para gestão do Hub B3. Como posso te ajudar?",
+                backgroundColor: "#ffffff",
+                height: 700,
+                width: 400,
+                fontSize: 16,
+                poweredByTextColor: "#303235",
+                botMessage: {
+                    backgroundColor: "#f7f8ff",
+                    textColor: "#303235",
+                    showAvatar: true,
+                    avatarSrc: "https://media.discordapp.net/attachments/915691669234548746/1139840123895291936/Frame_1_8.png?width=666&height=671",
+                },
+                userMessage: {
+                    backgroundColor: "#083577",
+                    textColor: "#ffffff",
+                    showAvatar: false,
+                    avatarSrc: "https://cdn-icons-png.flaticon.com/512/10337/10337609.png",
+                },
+                textInput: {
+                    placeholder: "Digite sua mensagem",
+                    backgroundColor: "#ffffff",
+                    textColor: "#303235",
+                    sendButtonColor: "#3B81F6",
+                }
+            }
+        }
+    })
+</script>
+
