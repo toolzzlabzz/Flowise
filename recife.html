@@ -1,0 +1,47 @@
+<script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/gh/toolzzlabzz/FlowiseChatEmbed/dist/web.js"
+     Chatbot.init({
+         chatflowid: "a6fdd166-db5e-483a-966d-ec57e5ad0122",
+         apiHost: "https://tzz-flowai.onrender.com",
+         chatflowConfig: {
+             // topK: 2
+         },
+         theme: {
+             button: {
+                 backgroundColor: "#173DB6",
+                 right: 20,
+                 bottom: 20,
+                 size: "medium",
+                 iconColor: "white",
+                 customIconSrc: "https://www.xes-inc.com/wp-content/uploads/2015/12/technical-support-icon.png",
+             },
+             chatWindow: {
+                 welcomeMessage: "Olá cidadão, eu sou o RecifeGPT. Como posso te ajudar?",
+                 backgroundColor: "#ffffff",
+                 height: 800,
+                 width: 400,
+                 fontSize: 16,
+                 poweredByTextColor: "#303235",
+                 botMessage: {
+                     backgroundColor: "#f7f8ff",
+                     textColor: "#303235",
+                     showAvatar: true,
+                     avatarSrc: "https://pps.whatsapp.net/v/t61.24694-24/173394601_868742047375547_1726407590788785219_n.jpg?ccb=11-4&oh=01_AdRuNSzzLw1wLeigHGznVUT6Ac50TD5wn6BSGGFxqypZJQ&oe=64DF2B0F",
+                 },
+                 userMessage: {
+                     backgroundColor: "#173DB6",
+                     textColor: "#ffffff",
+                     showAvatar: false,
+                     avatarSrc: "https://cdn-icons-png.flaticon.com/512/10337/10337609.png",
+                 },
+                 textInput: {
+                     placeholder: "Digite sua mensagem aqui...",
+                     backgroundColor: "#ffffff",
+                     textColor: "#303235",
+                     sendButtonColor: "#173DB6",
+                 }
+             }
+         }
+     })
+ </script>
+ 
