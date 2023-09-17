@@ -30,10 +30,10 @@ import {
 import { scryptSync, randomBytes, timingSafeEqual } from 'crypto'
 import { lib, PBKDF2, AES, enc } from 'crypto-js'
 
-import { ChatFlow } from '../entity/ChatFlow'
-import { ChatMessage } from '../entity/ChatMessage'
-import { Credential } from '../entity/Credential'
-import { Tool } from '../entity/Tool'
+import { ChatFlow } from '../database/entities/ChatFlow'
+import { ChatMessage } from '../database/entities/ChatMessage'
+import { Credential } from '../database/entities/Credential'
+import { Tool } from '../database/entities/Tool'
 import { DataSource } from 'typeorm'
 
 const QUESTION_VAR_PREFIX = 'question'
@@ -448,9 +448,10 @@ export const replaceInputsWithConfig = (flowNodeData: INodeData, overrideConfig:
             // If overrideConfig[key] is object
             if (overrideConfig[config] && typeof overrideConfig[config] === 'object') {
                 const nodeIds = Object.keys(overrideConfig[config])
-                if (!nodeIds.includes(flowNodeData.id)) continue
-                else paramsObj[config] = overrideConfig[config][flowNodeData.id]
-                continue
+                if (nodeIds.includes(flowNodeData.id)) {
+                    paramsObj[config] = overrideConfig[config][flowNodeData.id]
+                    continue
+                }
             }
 
             let paramValue = overrideConfig[config] ?? paramsObj[config]
@@ -877,12 +878,14 @@ export const decryptCredentialData = async (
  * @returns {Credential}
  */
 export const transformToCredentialEntity = async (body: ICredentialReqBody): Promise<Credential> => {
-    const encryptedData = await encryptCredentialData(body.plainDataObj)
-
-    const credentialBody = {
+    const credentialBody: ICommonObject = {
         name: body.name,
-        credentialName: body.credentialName,
-        encryptedData
+        credentialName: body.credentialName
+    }
+
+    if (body.plainDataObj) {
+        const encryptedData = await encryptCredentialData(body.plainDataObj)
+        credentialBody.encryptedData = encryptedData
     }
 
     const newCredential = new Credential()
