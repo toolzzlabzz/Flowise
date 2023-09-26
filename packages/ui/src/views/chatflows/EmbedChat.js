@@ -283,7 +283,6 @@ const EmbedChat = ({ chatflowid }) => {
                         <>
                             <span>
                             Cole isso em qualquer lugar do <code>{`<body>`}</code> tag do seu arquivo html.
-                                
                             </span>
                             <div style={{ height: 10 }}></div>
                         </>

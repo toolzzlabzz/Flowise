@@ -445,7 +445,7 @@ const ShareChatbot = ({ isSessionMemory }) => {
                     <Typography variant='h4' sx={{ mb: 1, mt: 2 }}>
                         Session Memory
                     </Typography>
-                    {booleanField(generateNewSession, 'generateNewSession', 'Iniciar nova sessão quando o link do chatbot for aberto ou atualizado')}
+                    {booleanField(generateNewSession, 'generateNewSession', 'Start new session when chatbot link is opened or refreshed')}
                 </>
             )}
 
