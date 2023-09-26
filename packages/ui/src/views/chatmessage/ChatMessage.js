@@ -28,8 +28,8 @@ import useApi from 'hooks/useApi'
 // Const
 import { baseURL, maxScroll } from 'store/constant'
 
-import robotPNG from 'https://media.discordapp.net/attachments/915691669234548746/1156273184979558490/toolzz-projects.png?ex=65145ed1&is=65130d51&hm=8de609163c67dfe5915016fe79e3d4bb10b241b8e970bbfd667065807c13d568&=&width=666&height=671'
-import userPNG from 'https://media.discordapp.net/attachments/915691669234548746/1156273473723830383/user.png?ex=65145f16&is=65130d96&hm=cc84d6375fcd46466606bed7df05e2aefe72d1dd2fc474b8554e449424db9572&='
+import robotPNG from 'assets/images/robot.png'
+import userPNG from 'assets/images/account.png'
 import { isValidURL } from 'utils/genericHelper'
 
 export const ChatMessage = ({ open, chatflowid, isDialog }) => {
