@@ -21,7 +21,7 @@ const dashboard = {
         },
         {
             id: 'marketplaces',
-            title: 'Marketplaces',
+            title: 'Templates',
             type: 'item',
             url: '/marketplaces',
             icon: icons.IconBuildingStore,
@@ -29,7 +29,7 @@ const dashboard = {
         },
         {
             id: 'tools',
-            title: 'Tools',
+            title: 'Plugins',
             type: 'item',
             url: '/tools',
             icon: icons.IconTool,
@@ -37,7 +37,7 @@ const dashboard = {
         },
         {
             id: 'credentials',
-            title: 'Credentials',
+            title: 'Credenciais',
             type: 'item',
             url: '/credentials',
             icon: icons.IconLock,
