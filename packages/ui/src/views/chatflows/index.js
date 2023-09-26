@@ -108,7 +108,7 @@ const Chatflows = () => {
                     <Box sx={{ flexGrow: 1 }} />
                     <Grid item>
                         <StyledButton variant='contained' sx={{ color: 'white' }} onClick={addNew} startIcon={<IconPlus />}>
-                            Add New
+                            Criar novo Chatflow
                         </StyledButton>
                     </Grid>
                 </Grid>

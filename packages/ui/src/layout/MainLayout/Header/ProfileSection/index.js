@@ -206,7 +206,7 @@ const ProfileSection = ({ username, handleLogout }) => {
                                                     <ListItemIcon>
                                                         <IconFileDownload stroke={1.5} size='1.3rem' />
                                                     </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant='body2'>Load Database</Typography>} />
+                                                    <ListItemText primary={<Typography variant='body2'>Importar Database</Typography>} />
                                                 </ListItemButton>
                                                 <ListItemButton
                                                     sx={{ borderRadius: `${customization.borderRadius}px` }}
@@ -215,7 +215,7 @@ const ProfileSection = ({ username, handleLogout }) => {
                                                     <ListItemIcon>
                                                         <IconFileExport stroke={1.5} size='1.3rem' />
                                                     </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant='body2'>Export Database</Typography>} />
+                                                    <ListItemText primary={<Typography variant='body2'>Exportar Database</Typography>} />
                                                 </ListItemButton>
                                                 <ListItemButton
                                                     sx={{ borderRadius: `${customization.borderRadius}px` }}
@@ -224,20 +224,11 @@ const ProfileSection = ({ username, handleLogout }) => {
                                                         setAboutDialogOpen(true)
                                                     }}
                                                 >
-                                                    <ListItemIcon>
-                                                        <IconInfoCircle stroke={1.5} size='1.3rem' />
-                                                    </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant='body2'>About Flowise</Typography>} />
-                                                </ListItemButton>
-                                                {localStorage.getItem('username') && localStorage.getItem('password') && (
-                                                    <ListItemButton
-                                                        sx={{ borderRadius: `${customization.borderRadius}px` }}
-                                                        onClick={handleLogout}
-                                                    >
+                                                
                                                         <ListItemIcon>
                                                             <IconLogout stroke={1.5} size='1.3rem' />
                                                         </ListItemIcon>
-                                                        <ListItemText primary={<Typography variant='body2'>Logout</Typography>} />
+                                                        <ListItemText primary={<Typography variant='body2'>Sair</Typography>} />
                                                     </ListItemButton>
                                                 )}
                                             </List>
