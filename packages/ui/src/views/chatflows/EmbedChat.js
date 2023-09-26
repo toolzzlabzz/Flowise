@@ -289,7 +289,7 @@ const EmbedChat = ({ chatflowid }) => {
                     )}
                     <CopyBlock theme={atomOneDark} text={getCode(codeLang)} language='javascript' showLineNumbers={false} wrapLines />
 
-                    <CheckboxInput label='Configurações Avançadas do Embed' value={embedChatCheckboxVal} onChange={onCheckBoxEmbedChatChanged} />
+                    <CheckboxInput label='Show Embed Chat Config' value={embedChatCheckboxVal} onChange={onCheckBoxEmbedChatChanged} />
 
                     {embedChatCheckboxVal && (
                         <CopyBlock
