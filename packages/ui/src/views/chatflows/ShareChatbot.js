@@ -395,17 +395,17 @@ const ShareChatbot = ({ isSessionMemory }) => {
                     />
                 </div>
             </Stack>
-            {textField(welcomeMessage, 'welcomeMessage', 'Welcome Message', 'string', 'Hello! This is custom welcome message')}
-            {colorField(backgroundColor, 'backgroundColor', 'Background Color')}
-            {textField(fontSize, 'fontSize', 'Font Size', 'number')}
-            {colorField(poweredByTextColor, 'poweredByTextColor', 'PoweredBy TextColor')}
+            {textField(welcomeMessage, 'welcomeMessage', 'Welcome Message', 'string', 'Olá como posso te ajudar?')}
+            {colorField(backgroundColor, 'backgroundColor', 'Cor do background')}
+            {textField(fontSize, 'fontSize', 'Tamanho da fonte', 'number')}
+
 
             {/*BOT Message*/}
             <Typography variant='h4' sx={{ mb: 1, mt: 2 }}>
-                Bot Message
+                Mensagem do Bot
             </Typography>
-            {colorField(botMessageBackgroundColor, 'botMessageBackgroundColor', 'Background Color')}
-            {colorField(botMessageTextColor, 'botMessageTextColor', 'Text Color')}
+            {colorField(botMessageBackgroundColor, 'botMessageBackgroundColor', 'Cor do Background')}
+            {colorField(botMessageTextColor, 'botMessageTextColor', 'Cor do Texto')}
             {textField(
                 botMessageAvatarSrc,
                 'botMessageAvatarSrc',
@@ -417,10 +417,10 @@ const ShareChatbot = ({ isSessionMemory }) => {
 
             {/*USER Message*/}
             <Typography variant='h4' sx={{ mb: 1, mt: 2 }}>
-                User Message
+                Mensagem do Usuário
             </Typography>
-            {colorField(userMessageBackgroundColor, 'userMessageBackgroundColor', 'Background Color')}
-            {colorField(userMessageTextColor, 'userMessageTextColor', 'Text Color')}
+            {colorField(userMessageBackgroundColor, 'userMessageBackgroundColor', 'Cor do Background')}
+            {colorField(userMessageTextColor, 'userMessageTextColor', 'Cor do Texto')}
             {textField(
                 userMessageAvatarSrc,
                 'userMessageAvatarSrc',
@@ -428,15 +428,15 @@ const ShareChatbot = ({ isSessionMemory }) => {
                 'string',
                 `https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/usericon.png`
             )}
-            {booleanField(userMessageShowAvatar, 'userMessageShowAvatar', 'Show Avatar')}
+            {booleanField(userMessageShowAvatar, 'userMessageShowAvatar', 'Mostrar Avatar')}
 
             {/*TEXT Input*/}
             <Typography variant='h4' sx={{ mb: 1, mt: 2 }}>
                 Text Input
             </Typography>
-            {colorField(textInputBackgroundColor, 'textInputBackgroundColor', 'Background Color')}
-            {colorField(textInputTextColor, 'textInputTextColor', 'Text Color')}
-            {textField(textInputPlaceholder, 'textInputPlaceholder', 'TextInput Placeholder', 'string', `Type question..`)}
+            {colorField(textInputBackgroundColor, 'textInputBackgroundColor', 'Cor do Background')}
+            {colorField(textInputTextColor, 'textInputTextColor', 'Cor do Texto')}
+            {textField(textInputPlaceholder, 'textInputPlaceholder', 'TextInput Placeholder', 'string', `Digite aqui..`)}
             {colorField(textInputSendButtonColor, 'textInputSendButtonColor', 'TextIntput Send Button Color')}
 
             {/*Session Memory Input*/}
@@ -445,7 +445,7 @@ const ShareChatbot = ({ isSessionMemory }) => {
                     <Typography variant='h4' sx={{ mb: 1, mt: 2 }}>
                         Session Memory
                     </Typography>
-                    {booleanField(generateNewSession, 'generateNewSession', 'Start new session when chatbot link is opened or refreshed')}
+                    {booleanField(generateNewSession, 'generateNewSession', 'Iniciar nova sessão quando o link do chatbot for aberto ou atualizado')}
                 </>
             )}
 
