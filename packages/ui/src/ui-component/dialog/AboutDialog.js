@@ -23,7 +23,7 @@ const AboutDialog = ({ show, onCancel }) => {
                     password
                 }
             }
-            const latestReleaseReq = axios.get('https://api.github.com/repos/FlowiseAI/Flowise/releases/latest')
+            const latestReleaseReq = axios.get('https://api.github.com/repos/toolzzlabzz/Flowise/releases/latest')
             const currentVersionReq = axios.get(`${baseURL}/api/v1/version`, { ...config })
 
             Promise.all([latestReleaseReq, currentVersionReq])
@@ -52,7 +52,7 @@ const AboutDialog = ({ show, onCancel }) => {
             aria-describedby='alert-dialog-description'
         >
             <DialogTitle sx={{ fontSize: '1rem' }} id='alert-dialog-title'>
-                Flowise Version
+                Versão Toolzz AI
             </DialogTitle>
             <DialogContent>
                 {data && (
@@ -60,9 +60,9 @@ const AboutDialog = ({ show, onCancel }) => {
                         <Table aria-label='simple table'>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Current Version</TableCell>
-                                    <TableCell>Latest Version</TableCell>
-                                    <TableCell>Published At</TableCell>
+                                    <TableCell>Versão Atual</TableCell>
+                                    <TableCell>Última Versão</TableCell>
+                                    <TableCell>Publicada em</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
