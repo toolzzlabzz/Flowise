@@ -124,85 +124,26 @@ const Chatflows = () => {
 
     return (
         <MainCard sx={{ background: customization.isDarkMode ? theme.palette.common.black : '' }}>
-            <Stack flexDirection='column'>
-                <Box sx={{ flexGrow: 1 }}>
-                    <Toolbar
-                        disableGutters={true}
-                        style={{
-                            margin: 1,
-                            padding: 1,
-                            paddingBottom: 10,
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            width: '100%'
-                        }}
-                    >
-                        <h1>Chatflows</h1>
-                        <TextField
-                            size='small'
-                            sx={{ display: { xs: 'none', sm: 'block' }, ml: 3 }}
-                            variant='outlined'
-                            placeholder='Search name or category'
-                            onChange={onSearchChange}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position='start'>
-                                        <IconSearch />
-                                    </InputAdornment>
-                                )
-                            }}
-                        />
-                        <Box sx={{ flexGrow: 1 }} />
-                        <ButtonGroup sx={{ maxHeight: 40 }} disableElevation variant='contained' aria-label='outlined primary button group'>
-                            <ButtonGroup disableElevation variant='contained' aria-label='outlined primary button group'>
-                                <ToggleButtonGroup sx={{ maxHeight: 40 }} value={view} color='primary' exclusive onChange={handleChange}>
-                                    <ToggleButton
-                                        sx={{ color: theme?.customization?.isDarkMode ? 'white' : 'inherit' }}
-                                        variant='contained'
-                                        value='card'
-                                        title='Card View'
-                                    >
-                                        <IconLayoutGrid />
-                                    </ToggleButton>
-                                    <ToggleButton
-                                        sx={{ color: theme?.customization?.isDarkMode ? 'white' : 'inherit' }}
-                                        variant='contained'
-                                        value='list'
-                                        title='List View'
-                                    >
-                                        <IconList />
-                                    </ToggleButton>
-                                </ToggleButtonGroup>
-                            </ButtonGroup>
-                            <Box sx={{ width: 5 }} />
-                            <ButtonGroup disableElevation aria-label='outlined primary button group'>
-                                <StyledButton variant='contained' onClick={addNew} startIcon={<IconPlus />}>
-                                    Add New
-                                </StyledButton>
-                            </ButtonGroup>
-                        </ButtonGroup>
-                    </Toolbar>
-                </Box>
-                {!isLoading && (!view || view === 'card') && getAllChatflowsApi.data && (
-                    <Grid container spacing={gridSpacing}>
-                        {getAllChatflowsApi.data.filter(filterFlows).map((data, index) => (
-                            <Grid key={index} item lg={3} md={4} sm={6} xs={12}>
-                                <ItemCard onClick={() => goToCanvas(data)} data={data} images={images[data.id]} />
-                            </Grid>
-                        ))}
+            <Stack flexDirection='row'>
+                <h1>Chatflows</h1>
+                <Grid sx={{ mb: 1.25 }} container direction='row'>
+                    <Box sx={{ flexGrow: 1 }} />
+                    <Grid item>
+                        <StyledButton variant='contained' sx={{ color: 'white' }} onClick={addNew} startIcon={<IconPlus />}>
+                            Criar novo Bot
+                        </StyledButton>
                     </Grid>
-                )}
-                {!isLoading && view === 'list' && getAllChatflowsApi.data && (
-                    <FlowListTable
-                        sx={{ mt: 20 }}
-                        data={getAllChatflowsApi.data}
-                        images={images}
-                        filterFunction={filterFlows}
-                        updateFlowsApi={getAllChatflowsApi}
-                    />
-                )}
+                </Grid>
             </Stack>
-
+            <Grid container spacing={gridSpacing}>
+                {!isLoading &&
+                    getAllChatflowsApi.data &&
+                    getAllChatflowsApi.data.map((data, index) => (
+                        <Grid key={index} item lg={3} md={4} sm={6} xs={12}>
+                            <ItemCard onClick={() => goToCanvas(data)} data={data} images={images[data.id]} />
+                        </Grid>
+                    ))}
+            </Grid>
             {!isLoading && (!getAllChatflowsApi.data || getAllChatflowsApi.data.length === 0) && (
                 <Stack sx={{ alignItems: 'center', justifyContent: 'center' }} flexDirection='column'>
                     <Box sx={{ p: 2, height: 'auto' }}>
