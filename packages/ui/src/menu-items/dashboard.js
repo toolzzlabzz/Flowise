@@ -1,8 +1,8 @@
 // assets
-import { IconHierarchy, IconBuildingStore, IconKey, IconTool, IconLock, IconTemplate } from '@tabler/icons'
+import { IconHierarchy, IconBuildingStore, IconKey, IconTool, IconLock } from '@tabler/icons'
 
 // constant
-const icons = { IconHierarchy, IconBooks, IconBuildingStore, IconKey, IconTool, IconLock, IconTemplate, IconPlug }
+const icons = { IconHierarchy, IconBuildingStore, IconKey, IconTool, IconLock }
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -11,14 +11,6 @@ const dashboard = {
     title: '',
     type: 'group',
     children: [
-        {
-            id: 'chatflows',
-            title: 'Datasets',
-            type: 'item',
-            url: '/chatflows',
-            icon: icons.IconBooks,
-            breadcrumbs: true
-        },
         {
             id: 'chatflows',
             title: 'Chatflows',
@@ -32,7 +24,7 @@ const dashboard = {
             title: 'Templates',
             type: 'item',
             url: '/marketplaces',
-            icon: icons.IconTemplate,
+            icon: icons.IconBuildingStore,
             breadcrumbs: true
         },
         {
@@ -40,7 +32,7 @@ const dashboard = {
             title: 'Plugins',
             type: 'item',
             url: '/tools',
-            icon: icons.IconPlug,
+            icon: icons.IconTool,
             breadcrumbs: true
         },
         {
@@ -61,7 +53,7 @@ const dashboard = {
         },
         {
             id: 'apikey',
-            title: 'Chaves API',
+            title: 'API Keys',
             type: 'item',
             url: '/apikey',
             icon: icons.IconKey,
