@@ -38,7 +38,7 @@ const Tools = () => {
     const onUploadFile = (file) => {
         try {
             const dialogProp = {
-                title: 'Add New Tool',
+                title: 'Adicionar Novo Plugin',
                 type: 'IMPORT',
                 cancelButtonName: 'Cancel',
                 confirmButtonName: 'Save',
@@ -69,10 +69,10 @@ const Tools = () => {
 
     const addNew = () => {
         const dialogProp = {
-            title: 'Add New Tool',
+            title: 'Adicionar Novo Plugin',
             type: 'ADD',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Add'
+            cancelButtonName: 'Cancelar',
+            confirmButtonName: 'Adicionar'
         }
         setDialogProps(dialogProp)
         setShowDialog(true)
