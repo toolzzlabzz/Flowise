@@ -1,6 +1,5 @@
 {
-    "description": "Flowise Docs Github QnA using conversational retrieval QA chain",
-    "badge": "POPULAR",
+    "description": "Docs Github QnA using conversational retrieval QA chain",
     "nodes": [
         {
             "width": 300,
@@ -387,7 +386,7 @@
                 "id": "chatOpenAI_0",
                 "label": "ChatOpenAI",
                 "name": "chatOpenAI",
-                "version": 2,
+                "version": 1,
                 "type": "ChatOpenAI",
                 "baseClasses": ["ChatOpenAI", "BaseChatModel", "BaseLanguageModel"],
                 "category": "Chat Models",
@@ -497,25 +496,9 @@
                         "optional": true,
                         "additionalParams": true,
                         "id": "chatOpenAI_0-input-basepath-string"
-                    },
-                    {
-                        "label": "BaseOptions",
-                        "name": "baseOptions",
-                        "type": "json",
-                        "optional": true,
-                        "additionalParams": true,
-                        "id": "chatOpenAI_0-input-baseOptions-json"
                     }
                 ],
-                "inputAnchors": [
-                    {
-                        "label": "Cache",
-                        "name": "cache",
-                        "type": "BaseCache",
-                        "optional": true,
-                        "id": "chatOpenAI_0-input-cache-BaseCache"
-                    }
-                ],
+                "inputAnchors": [],
                 "inputs": {
                     "modelName": "gpt-3.5-turbo",
                     "temperature": 0.9,
@@ -524,8 +507,7 @@
                     "frequencyPenalty": "",
                     "presencePenalty": "",
                     "timeout": "",
-                    "basepath": "",
-                    "baseOptions": ""
+                    "basepath": ""
                 },
                 "outputAnchors": [
                     {
