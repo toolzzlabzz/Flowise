@@ -23,7 +23,7 @@ const AboutDialog = ({ show, onCancel }) => {
                     password
                 }
             }
-            const latestReleaseReq = axios.get('https://api.github.com/repos/toolzzlabzz/Flowise/releases/latest')
+            const latestReleaseReq = axios.get('https://api.github.com/repos/FlowiseAI/Flowise/releases/latest')
             const currentVersionReq = axios.get(`${baseURL}/api/v1/version`, { ...config })
 
             Promise.all([latestReleaseReq, currentVersionReq])
