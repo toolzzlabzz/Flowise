@@ -2,7 +2,7 @@
 import { IconHierarchy, IconBuildingStore, IconKey, IconTool, IconLock, IconTemplate } from '@tabler/icons'
 
 // constant
-const icons = { IconHierarchy, IconBooks, IconBuildingStore, IconKey, IconTool, IconLock, IconTemplate, IconPlug, IconBooks }
+const icons = { IconHierarchy, IconBooks, IconBuildingStore, IconKey, IconTool, IconLock, IconTemplate, IconPlug }
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
