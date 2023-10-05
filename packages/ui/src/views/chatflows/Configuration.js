@@ -133,12 +133,6 @@ const Configuration = () => {
             {/*Rate Limit*/}
             <Typography variant='h4' sx={{ mb: 1, mt: 2 }}>
                 Rate Limit{' '}
-                <TooltipWithParser
-                    style={{ mb: 1, mt: 2, marginLeft: 10 }}
-                    title={
-                        'Visit <a target="_blank" href="https://docs.flowiseai.com/rate-limit">Rate Limit Setup Guide</a> to set up Rate Limit correctly in your hosting environment.'
-                    }
-                />
             </Typography>
             {textField(limitMax, 'limitMax', 'Message Limit per Duration', 'number')}
             {textField(limitDuration, 'limitDuration', 'Duration in Second', 'number')}
