@@ -1,5 +1,5 @@
 {
-    "description": "Given API docs, agent automatically decide which API to call, generating url and body request from conversation",
+    "description": "Dados os documentos da API, o agente decide automaticamente qual API chamar, gerando URL e solicitação de corpo da conversa",
     "nodes": [
         {
             "width": 300,

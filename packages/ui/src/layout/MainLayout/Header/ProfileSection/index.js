@@ -55,6 +55,56 @@ const ProfileSection = ({ username, handleLogout }) => {
         setOpen((prevOpen) => !prevOpen)
     }
 
+    const handleExportDB = async () => {
+        setOpen(false)
+        try {
+            const response = await databaseApi.getExportDatabase()
+            const exportItems = response.data
+            let dataStr = JSON.stringify(exportItems)
+            let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr)
+
+            let exportFileDefaultName = `DB.json`
+
+            let linkElement = document.createElement('a')
+            linkElement.setAttribute('href', dataUri)
+            linkElement.setAttribute('download', exportFileDefaultName)
+            linkElement.click()
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    const handleFileUpload = (e) => {
+        if (!e.target.files) return
+
+        const file = e.target.files[0]
+        const reader = new FileReader()
+        reader.onload = async (evt) => {
+            if (!evt?.target?.result) {
+                return
+            }
+            const { result } = evt.target
+
+            if (result.includes(`"chatmessages":[`) && result.includes(`"chatflows":[`) && result.includes(`"apikeys":[`)) {
+                dispatch({ type: SET_MENU, opened: false })
+                setLoading(true)
+
+                try {
+                    await databaseApi.createLoadDatabase(JSON.parse(result))
+                    setLoading(false)
+                    navigate('/', { replace: true })
+                    navigate(0)
+                } catch (e) {
+                    console.error(e)
+                    setLoading(false)
+                }
+            } else {
+                alert('Incorrect Database Format')
+            }
+        }
+        reader.readAsText(file)
+    }
+
     const prevOpen = useRef(open)
     useEffect(() => {
         if (prevOpen.current === true && open === false) {

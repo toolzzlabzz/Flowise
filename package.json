@@ -1,8 +1,8 @@
 {
-    "name": "flowise",
+    "name": "Toolzz AI",
     "version": "1.4.5",
     "private": true,
-    "homepage": "https://flowiseai.com",
+    "homepage": "https://toolzz.ai",
     "workspaces": [
         "packages/*",
         "flowise",

@@ -1,6 +1,5 @@
 {
-    "description": "QnA chain using Ollama local LLM, LocalAI embedding model, and Faiss local vector store",
-    "badge": "POPULAR",
+    "description": "Cadeia QnA usando LLM local, modelos de incorporação e armazenamento de vetores local Faiss",
     "nodes": [
         {
             "width": 300,

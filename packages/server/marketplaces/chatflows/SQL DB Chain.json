@@ -189,7 +189,7 @@
                 "type": "SqlDatabaseChain",
                 "baseClasses": ["SqlDatabaseChain", "BaseChain", "Runnable"],
                 "category": "Chains",
-                "description": "Answer questions over a SQL database",
+                "description": "Responda perguntas em um banco de dados SQL",
                 "inputParams": [
                     {
                         "label": "Database",

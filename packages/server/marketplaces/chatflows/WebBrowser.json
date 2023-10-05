@@ -1,5 +1,5 @@
 {
-    "description": "Conversational Agent with ability to visit a website and extract information",
+    "description": "Agente conversacional com capacidade de visitar um site e extrair informações",
     "nodes": [
         {
             "width": 300,

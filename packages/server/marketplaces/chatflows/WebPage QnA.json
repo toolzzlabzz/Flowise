@@ -1,5 +1,5 @@
 {
-    "description": "Scrape web pages for QnA with long term memory Motorhead and return source documents",
+    "description": "Raspe páginas da web para QnA com memória de longo prazo Motorhead e retorne documentos de origem",
     "badge": "POPULAR",
     "nodes": [
         {
@@ -344,7 +344,7 @@
                     }
                 ],
                 "inputs": {
-                    "url": "https://flowiseai.com/",
+                    "url": "https://toolzz.ai",
                     "textSplitter": "{{htmlToMarkdownTextSplitter_0.data.instance}}",
                     "relativeLinksMethod": "",
                     "limit": "",

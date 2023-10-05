@@ -1,6 +1,5 @@
 {
-    "description": "Upsert multiple files with metadata and filter by it using conversational retrieval QA chain",
-    "badge": "POPULAR",
+    "description": "Faça upload de vários arquivos com filtros de metadados e alimente a cadeia de controle de qualidade de recuperação de conversação",
     "nodes": [
         {
             "width": 300,

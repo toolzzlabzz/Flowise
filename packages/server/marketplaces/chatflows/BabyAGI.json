@@ -1,5 +1,5 @@
 {
-    "description": "Use BabyAGI to create tasks and reprioritize for a given objective",
+    "description": "Use BabyAGI para criar tarefas e redefinir prioridades para um determinado objetivo",
     "nodes": [
         {
             "width": 300,

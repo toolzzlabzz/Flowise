@@ -1,5 +1,5 @@
 {
-    "description": "Simple LLM Chain using HuggingFace Inference API on falcon-7b-instruct model",
+    "description": "Cadeia LLM simples usando API de inferência HuggingFace no modelo falcon-7b-instruct",
     "nodes": [
         {
             "width": 300,

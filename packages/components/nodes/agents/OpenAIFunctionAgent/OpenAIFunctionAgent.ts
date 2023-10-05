@@ -24,7 +24,7 @@ class OpenAIFunctionAgent_Agents implements INode {
         this.type = 'AgentExecutor'
         this.category = 'Agents'
         this.icon = 'openai.png'
-        this.description = `An agent that uses Function Calling to pick the tool and args to call`
+        this.description = `Um agente que usa a funcionalidade Function Calling da OpenAI para escolher a ferramenta e os argumentos para chamar`
         this.baseClasses = [this.type, ...getBaseClasses(AgentExecutor)]
         this.inputs = [
             {

@@ -1,5 +1,5 @@
 {
-    "description": "Use ChatGPT Plugins within LangChain abstractions with GET and POST Tools",
+    "description": "Use plug-ins ChatGPT em abstrações LangChain com ferramentas GET e POST",
     "nodes": [
         {
             "width": 300,

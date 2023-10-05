@@ -1,5 +1,5 @@
 {
-    "description": "Use long term memory like Zep to differentiate conversations between users with sessionId",
+    "description": "Use Zep de memória de longo prazo para diferenciar conversas entre usuários com sessionId",
     "nodes": [
         {
             "width": 300,

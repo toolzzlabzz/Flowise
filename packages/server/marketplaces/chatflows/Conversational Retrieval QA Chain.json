@@ -1,6 +1,5 @@
 {
-    "description": "Text file QnA using conversational retrieval QA chain",
-    "badge": "POPULAR",
+    "description": "QnA de arquivo de texto usando cadeia de controle de qualidade de recuperação conversacional",
     "nodes": [
         {
             "width": 300,
