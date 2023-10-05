@@ -760,9 +760,6 @@ formData.append("openAIApiKey[openAIEmbeddings_0]", "sk-my-openai-2nd-key")`
                                         </div>
                                     </>
                                 )}
-                                {getIsChatflowStreamingApi.data?.isStreaming && (
-                                    =
-                                )}
                             </>
                         )}
                         {codeLang === 'Share Chatbot' && !chatflowApiKeyId && (
