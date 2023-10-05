@@ -26,7 +26,7 @@ class VectaraUpsert_VectorStores implements INode {
         this.type = 'Vectara'
         this.icon = 'vectara.png'
         this.category = 'Vector Stores'
-        this.description = 'Upsert documents to Vectara'
+        this.description = 'Enviar documentos para o Vectara'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'DEPRECATING'
         this.credential = {
@@ -45,8 +45,7 @@ class VectaraUpsert_VectorStores implements INode {
             {
                 label: 'Metadata Filter',
                 name: 'filter',
-                description:
-                    'Filter to apply to Vectara metadata.',
+                description: 'Filter to apply to Vectara metadata.',
                 type: 'string',
                 additionalParams: true,
                 optional: true

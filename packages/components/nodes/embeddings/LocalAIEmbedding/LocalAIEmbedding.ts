@@ -19,7 +19,7 @@ class LocalAIEmbedding_Embeddings implements INode {
         this.type = 'LocalAI Embeddings'
         this.icon = 'localai.png'
         this.category = 'Embeddings'
-        this.description = 'Use local embeddings models like llama.cpp'
+        this.description = 'Use modelos de embedding local como llama.cpp'
         this.baseClasses = [this.type, 'Embeddings']
         this.inputs = [
             {

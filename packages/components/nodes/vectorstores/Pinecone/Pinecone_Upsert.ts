@@ -27,7 +27,7 @@ class PineconeUpsert_VectorStores implements INode {
         this.type = 'Pinecone'
         this.icon = 'pinecone.png'
         this.category = 'Vector Stores'
-        this.description = 'Upsert documents to Pinecone'
+        this.description = 'Enviar documentos para Pinecone'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'DEPRECATING'
         this.credential = {

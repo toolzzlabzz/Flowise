@@ -22,7 +22,7 @@ class Bittensor_LLMs implements INode {
         this.type = 'Bittensor'
         this.icon = 'logo.png'
         this.category = 'LLMs'
-        this.description = 'Wrapper around Bittensor subnet 1 large language models'
+        this.description = 'Wrapper em torno de modelos de linguagem grandes da sub-rede 1 do Bittensor'
         this.baseClasses = [this.type, ...getBaseClasses(NIBittensorLLM)]
         this.inputs = [
             {

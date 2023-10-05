@@ -22,7 +22,7 @@ class NotionPage_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'notion.png'
         this.category = 'Document Loaders'
-        this.description = 'Load data from Notion Page (including child pages all as separate documents)'
+        this.description = 'Carregar dados da Notion Page (incluindo páginas secundárias, todas como documentos separados)'
         this.baseClasses = [this.type]
         this.credential = {
             label: 'Connect Credential',

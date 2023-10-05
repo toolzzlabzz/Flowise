@@ -34,7 +34,7 @@ class ConversationalRetrievalQAChain_Chains implements INode {
         this.type = 'ConversationalRetrievalQAChain'
         this.icon = 'chain.svg'
         this.category = 'Chains'
-        this.description = 'Document QA - built on RetrievalQAChain to provide a chat history component'
+        this.description = 'Document QA - construído em RetrievalQAChain para fornecer um componente de histórico de bate-papo'
         this.baseClasses = [this.type, ...getBaseClasses(ConversationalRetrievalQAChain)]
         this.inputs = [
             {

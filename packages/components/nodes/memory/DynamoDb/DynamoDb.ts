@@ -30,7 +30,7 @@ class DynamoDb_Memory implements INode {
         this.type = 'DynamoDBChatMemory'
         this.icon = 'dynamodb.svg'
         this.category = 'Memory'
-        this.description = 'Stores the conversation in dynamo db table'
+        this.description = 'Armazena a conversa na tabela do Dynamodb'
         this.baseClasses = [this.type, ...getBaseClasses(BufferMemory)]
         this.credential = {
             label: 'Connect Credential',

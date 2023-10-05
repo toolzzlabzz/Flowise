@@ -31,7 +31,7 @@ class AWSChatBedrock_ChatModels implements INode {
         this.type = 'AWSChatBedrock'
         this.icon = 'awsBedrock.png'
         this.category = 'Chat Models'
-        this.description = 'Wrapper around AWS Bedrock large language models that use the Chat endpoint'
+        this.description = 'Wrapper em torno de modelos de linguagem grande do AWS Bedrock'
         this.baseClasses = [this.type, ...getBaseClasses(ChatBedrock)]
         this.credential = {
             label: 'AWS Credential',

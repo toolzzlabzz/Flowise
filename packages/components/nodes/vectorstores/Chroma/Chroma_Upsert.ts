@@ -27,7 +27,7 @@ class ChromaUpsert_VectorStores implements INode {
         this.type = 'Chroma'
         this.icon = 'chroma.svg'
         this.category = 'Vector Stores'
-        this.description = 'Upsert documents to Chroma'
+        this.description = 'Upsert documentos para o Chroma'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'DEPRECATING'
         this.credential = {

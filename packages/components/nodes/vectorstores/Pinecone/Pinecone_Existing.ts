@@ -25,7 +25,7 @@ class Pinecone_Existing_VectorStores implements INode {
         this.type = 'Pinecone'
         this.icon = 'pinecone.png'
         this.category = 'Vector Stores'
-        this.description = 'Load existing index from Pinecone (i.e: Document has been upserted)'
+        this.description = 'Carregar índice existente do Pinecone'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'DEPRECATING'
         this.credential = {

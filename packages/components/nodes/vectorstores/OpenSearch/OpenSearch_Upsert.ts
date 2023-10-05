@@ -26,7 +26,7 @@ class OpenSearchUpsert_VectorStores implements INode {
         this.type = 'OpenSearch'
         this.icon = 'opensearch.png'
         this.category = 'Vector Stores'
-        this.description = 'Upsert documents to OpenSearch'
+        this.description = 'Upsert documentos para OpenSearch'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'DEPRECATING'
         this.inputs = [

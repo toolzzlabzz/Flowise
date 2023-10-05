@@ -20,7 +20,7 @@ class Subtitles_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'subtitlesFile.svg'
         this.category = 'Document Loaders'
-        this.description = `Load data from subtitles files`
+        this.description = `Carregar dados de arquivos de legendas`
         this.baseClasses = [this.type]
         this.inputs = [
             {

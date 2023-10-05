@@ -21,7 +21,7 @@ class VectorStoreToDocument_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'vectorretriever.svg'
         this.category = 'Document Loaders'
-        this.description = 'Search documents with scores from vector store'
+        this.description = 'Pesquise documentos com pontuações do armazenamento de vetores'
         this.baseClasses = [this.type]
         this.inputs = [
             {

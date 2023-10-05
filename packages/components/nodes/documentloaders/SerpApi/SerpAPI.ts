@@ -22,7 +22,7 @@ class SerpAPI_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'serp.png'
         this.category = 'Document Loaders'
-        this.description = 'Load and process data from web search results'
+        this.description = 'Carregar e processar dados de resultados de pesquisa na web'
         this.baseClasses = [this.type]
         this.credential = {
             label: 'Connect Credential',

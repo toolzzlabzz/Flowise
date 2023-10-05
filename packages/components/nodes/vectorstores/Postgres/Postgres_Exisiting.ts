@@ -27,7 +27,7 @@ class Postgres_Existing_VectorStores implements INode {
         this.type = 'Postgres'
         this.icon = 'postgres.svg'
         this.category = 'Vector Stores'
-        this.description = 'Load existing index from Postgres using pgvector (i.e: Document has been upserted)'
+        this.description = 'Carregue o índice existente do Postgres usando pgvector'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'DEPRECATING'
         this.credential = {

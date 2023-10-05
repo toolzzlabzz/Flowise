@@ -21,7 +21,7 @@ class BabyAGI_Agents implements INode {
         this.type = 'BabyAGI'
         this.category = 'Agents'
         this.icon = 'babyagi.jpg'
-        this.description = 'Task Driven Autonomous Agent which creates new task and reprioritizes task list based on objective'
+        this.description = 'Agente autônomo orientado a tarefas que cria novas tarefas e reprioriza a lista de tarefas com base no objetivo'
         this.baseClasses = ['BabyAGI']
         this.inputs = [
             {

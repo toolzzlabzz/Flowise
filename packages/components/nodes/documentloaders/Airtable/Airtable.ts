@@ -24,7 +24,7 @@ class Airtable_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'airtable.svg'
         this.category = 'Document Loaders'
-        this.description = `Load data from Airtable table`
+        this.description = `Carregar dados da tabela Airtable`
         this.baseClasses = [this.type]
         this.credential = {
             label: 'Connect Credential',

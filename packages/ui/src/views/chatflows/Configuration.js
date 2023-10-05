@@ -16,7 +16,6 @@ import chatflowsApi from 'api/chatflows'
 
 // utils
 import useNotifier from 'utils/useNotifier'
-import { TooltipWithParser } from 'ui-component/tooltip/TooltipWithParser'
 
 const Configuration = () => {
     const dispatch = useDispatch()

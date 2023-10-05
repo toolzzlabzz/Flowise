@@ -25,7 +25,7 @@ class Chroma_Existing_VectorStores implements INode {
         this.type = 'Chroma'
         this.icon = 'chroma.svg'
         this.category = 'Vector Stores'
-        this.description = 'Load existing index from Chroma (i.e: Document has been upserted)'
+        this.description = 'Carregar o índice existente do Chroma (ou seja: o documento foi atualizado)'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'DEPRECATING'
         this.credential = {

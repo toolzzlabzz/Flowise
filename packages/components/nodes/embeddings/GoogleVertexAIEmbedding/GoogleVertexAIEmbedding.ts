@@ -22,7 +22,7 @@ class GoogleVertexAIEmbedding_Embeddings implements INode {
         this.type = 'GoogleVertexAIEmbeddings'
         this.icon = 'vertexai.svg'
         this.category = 'Embeddings'
-        this.description = 'Google vertexAI API to generate embeddings for a given text'
+        this.description = 'API vertexAI do Google para gerar embeddings para um determinado texto'
         this.baseClasses = [this.type, ...getBaseClasses(GoogleVertexAIEmbeddings)]
         this.credential = {
             label: 'Connect Credential',

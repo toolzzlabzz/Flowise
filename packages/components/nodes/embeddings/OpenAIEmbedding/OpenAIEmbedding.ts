@@ -21,7 +21,7 @@ class OpenAIEmbedding_Embeddings implements INode {
         this.type = 'OpenAIEmbeddings'
         this.icon = 'openai.png'
         this.category = 'Embeddings'
-        this.description = 'OpenAI API to generate embeddings for a given text'
+        this.description = 'API OpenAI para gerar embeddings para um determinado texto'
         this.baseClasses = [this.type, ...getBaseClasses(OpenAIEmbeddings)]
         this.credential = {
             label: 'Connect Credential',

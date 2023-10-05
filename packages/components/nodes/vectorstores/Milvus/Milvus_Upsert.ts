@@ -31,7 +31,7 @@ class Milvus_Upsert_VectorStores implements INode {
         this.type = 'Milvus'
         this.icon = 'milvus.svg'
         this.category = 'Vector Stores'
-        this.description = 'Upsert documents to Milvus'
+        this.description = 'Enviar documentos para Milvus'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'DEPRECATING'
         this.credential = {
