@@ -1,5 +1,5 @@
 {
-    "description": "An agent that uses Zapier NLA to accesss apps and actions on Zapier's platform",
+    "description": "Um agente que usa Zapier NLA para acessar aplicativos e ações na plataforma Zapier",
     "nodes": [
         {
             "width": 300,

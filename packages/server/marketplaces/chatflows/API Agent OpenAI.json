@@ -1,5 +1,5 @@
 {
-    "description": "Use OpenAI Function Agent and Chain to automatically decide which API to call, generating url and body request from conversation",
+    "description": "Use OpenAI Function Agent and Chain para decidir automaticamente qual API chamar, gerando url e solicitação de corpo da conversa",
     "nodes": [
         {
             "width": 300,
@@ -321,7 +321,7 @@
                 "type": "AgentExecutor",
                 "baseClasses": ["AgentExecutor", "BaseChain"],
                 "category": "Agents",
-                "description": "An agent that uses OpenAI's Function Calling functionality to pick the tool and args to call",
+                "description": "Um agente que usa a funcionalidade Function Calling da OpenAI para escolher a ferramenta e os argumentos para chamar",
                 "inputParams": [
                     {
                         "label": "System Message",

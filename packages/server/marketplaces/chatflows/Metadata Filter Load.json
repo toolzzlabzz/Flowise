@@ -1,5 +1,5 @@
 {
-    "description": "Load existing index with metadata filters and feed into conversational retrieval QA chain",
+    "description": "Carregue o índice existente com filtros de metadados e alimente a cadeia de controle de qualidade de recuperação conversacional",
     "nodes": [
         {
             "width": 300,

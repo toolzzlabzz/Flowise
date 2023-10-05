@@ -1,5 +1,5 @@
 {
-    "description": "An agent that uses the React Framework to decide what action to take",
+    "description": "Um agente que usa o React Framework para decidir qual ação tomar",
     "nodes": [
         {
             "width": 300,

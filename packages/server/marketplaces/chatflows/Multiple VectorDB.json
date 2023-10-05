@@ -1,5 +1,5 @@
 {
-    "description": "Use the agent to choose between multiple different vector databases, with the ability to use other tools",
+    "description": "Use o agente para escolher entre vários bancos de dados de vetores diferentes, com a capacidade de usar outras ferramentas",
     "nodes": [
         {
             "width": 300,

@@ -1,5 +1,5 @@
 {
-    "description": "Upsert multiple files with metadata filters and feed into conversational retrieval QA chain",
+    "description": "Faça upload de vários arquivos com filtros de metadados e alimente a cadeia de controle de qualidade de recuperação de conversação",
     "nodes": [
         {
             "width": 300,

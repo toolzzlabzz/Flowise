@@ -1,5 +1,5 @@
 {
-    "description": "A simple LLM chain that uses Vectara to enable conversations with uploaded files",
+    "description": "Uma cadeia LLM simples que usa Vectara para permitir conversas com arquivos carregados",
     "nodes": [
         {
             "width": 300,

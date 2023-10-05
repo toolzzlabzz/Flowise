@@ -1,5 +1,5 @@
 {
-    "description": "QnA chain using local LLM, Embedding models, and Faiss local vector store",
+    "description": "Cadeia QnA usando LLM local, modelos de incorporação e armazenamento de vetores local Faiss",
     "nodes": [
         {
             "width": 300,

@@ -1,5 +1,5 @@
 {
-    "description": "Use chat history to rephrase user question, and answer the rephrased question using retrieved docs from vector store",
+    "description": "Use o histórico de bate-papo para reformular a pergunta do usuário e responder à pergunta reformulada usando documentos recuperados do armazenamento de vetores",
     "nodes": [
         {
             "width": 300,

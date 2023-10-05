@@ -1,5 +1,5 @@
 {
-    "description": "A chain that automatically picks an appropriate prompt from multiple prompts",
+    "description": "Uma cadeia que escolhe automaticamente um prompt apropriado entre vários prompts",
     "nodes": [
         {
             "width": 300,

@@ -1,5 +1,5 @@
 {
-    "description": "Agent optimized for vector retrieval during conversation and answering questions based on previous dialogue.",
+    "description": "Agente otimizado para recuperação de vetores durante conversas e resposta a perguntas com base em diálogos anteriores.",
     "nodes": [
         {
             "width": 300,

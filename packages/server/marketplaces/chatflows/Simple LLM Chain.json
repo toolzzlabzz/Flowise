@@ -1,5 +1,5 @@
 {
-    "description": "Basic example of stateless (no memory) LLM Chain with a Prompt Template and LLM Model",
+    "description": "Tradução de idiomas usando LLM Chain com modelo de prompt de bate-papo e modelo de bate-papo",
     "nodes": [
         {
             "width": 300,

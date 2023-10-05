@@ -1,5 +1,5 @@
 {
-    "description": "Docs Github QnA using conversational retrieval QA chain",
+    "description": "Docs Github QnA usando cadeia de controle de qualidade de recuperação conversacional",
     "nodes": [
         {
             "width": 300,

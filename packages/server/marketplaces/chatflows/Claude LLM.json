@@ -1,5 +1,5 @@
 {
-    "description": "Use Anthropic Claude with 100k context window to ingest whole document for QnA",
+    "description": "Use Anthropic Claude com janela de contexto de 100k para ingerir documento inteiro para QnA",
     "nodes": [
         {
             "width": 300,

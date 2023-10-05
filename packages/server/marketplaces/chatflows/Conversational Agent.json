@@ -1,5 +1,5 @@
 {
-    "description": "A conversational agent for a chat model which utilize chat specific prompts",
+    "description": "Um agente de conversação para um modelo de chat que utiliza prompts específicos de chat",
     "nodes": [
         {
             "width": 300,

@@ -1,5 +1,5 @@
 {
-    "description": "Use output from a chain as prompt for another chain",
+    "description": "Use a saída de uma cadeia como prompt para outra cadeia",
     "nodes": [
         {
             "width": 300,

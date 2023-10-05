@@ -1,5 +1,5 @@
 {
-    "description": "A chain that automatically picks an appropriate retriever from multiple different vector databases",
+    "description": "Uma cadeia que escolhe automaticamente um recuperador apropriado em vários bancos de dados de vetores diferentes",
     "nodes": [
         {
             "width": 300,
