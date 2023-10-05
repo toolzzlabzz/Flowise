@@ -20,7 +20,7 @@ class CharacterTextSplitter_TextSplitters implements INode {
         this.type = 'CharacterTextSplitter'
         this.icon = 'textsplitter.svg'
         this.category = 'Text Splitters'
-        this.description = `splits only on one type of character (defaults to "\\n\\n").`
+        this.description = `divide apenas em um tipo de caractere (o padrão é "\\n\\n").`
         this.baseClasses = [this.type, ...getBaseClasses(CharacterTextSplitter)]
         this.inputs = [
             {

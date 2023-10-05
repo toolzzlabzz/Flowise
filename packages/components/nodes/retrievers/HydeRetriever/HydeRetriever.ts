@@ -22,7 +22,7 @@ class HydeRetriever_Retrievers implements INode {
         this.type = 'HydeRetriever'
         this.icon = 'hyderetriever.svg'
         this.category = 'Retrievers'
-        this.description = 'Use HyDE retriever to retrieve from a vector store'
+        this.description = 'Use o recuperador HyDE para recuperar de um armazenamento de vetores'
         this.baseClasses = [this.type, 'BaseRetriever']
         this.inputs = [
             {

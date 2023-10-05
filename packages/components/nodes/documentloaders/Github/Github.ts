@@ -22,7 +22,7 @@ class Github_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'github.png'
         this.category = 'Document Loaders'
-        this.description = `Load data from a GitHub repository`
+        this.description = `Carregar dados de um repositório no GitHub`
         this.baseClasses = [this.type]
         this.credential = {
             label: 'Connect Credential',

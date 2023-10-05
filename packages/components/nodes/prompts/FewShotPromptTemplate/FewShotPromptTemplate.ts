@@ -22,7 +22,7 @@ class FewShotPromptTemplate_Prompts implements INode {
         this.type = 'FewShotPromptTemplate'
         this.icon = 'prompt.svg'
         this.category = 'Prompts'
-        this.description = 'Prompt template you can build with examples'
+        this.description = 'Modelo de prompt que você pode construir com exemplos'
         this.baseClasses = [this.type, ...getBaseClasses(FewShotPromptTemplate)]
         this.inputs = [
             {

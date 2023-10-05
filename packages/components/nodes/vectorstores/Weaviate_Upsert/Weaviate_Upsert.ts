@@ -26,7 +26,7 @@ class WeaviateUpsert_VectorStores implements INode {
         this.type = 'Weaviate'
         this.icon = 'weaviate.png'
         this.category = 'Vector Stores'
-        this.description = 'Upsert documents to Weaviate'
+        this.description = 'Enviar documentos para o Weaviate'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.credential = {
             label: 'Connect Credential',

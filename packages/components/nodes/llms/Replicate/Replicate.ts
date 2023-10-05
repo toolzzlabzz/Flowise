@@ -21,7 +21,7 @@ class Replicate_LLMs implements INode {
         this.type = 'Replicate'
         this.icon = 'replicate.svg'
         this.category = 'LLMs'
-        this.description = 'Use Replicate to run open source models on cloud'
+        this.description = 'Use o Replicate para executar modelos de código aberto na nuvem'
         this.baseClasses = [this.type, 'BaseChatModel', ...getBaseClasses(Replicate)]
         this.credential = {
             label: 'Connect Credential',

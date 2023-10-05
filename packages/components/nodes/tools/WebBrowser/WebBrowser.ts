@@ -22,7 +22,7 @@ class WebBrowser_Tools implements INode {
         this.type = 'WebBrowser'
         this.icon = 'webBrowser.svg'
         this.category = 'Tools'
-        this.description = 'Gives agent the ability to visit a website and extract information'
+        this.description = 'Dá ao agente a capacidade de visitar um site e extrair informações'
         this.inputs = [
             {
                 label: 'Language Model',

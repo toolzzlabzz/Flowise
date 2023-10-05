@@ -20,7 +20,7 @@ class Json_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'json.svg'
         this.category = 'Document Loaders'
-        this.description = `Load data from JSON files`
+        this.description = `Carregar dados via JSON files`
         this.baseClasses = [this.type]
         this.inputs = [
             {

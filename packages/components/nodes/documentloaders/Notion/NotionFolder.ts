@@ -20,7 +20,7 @@ class NotionFolder_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'notion.png'
         this.category = 'Document Loaders'
-        this.description = 'Load data from the exported and unzipped Notion folder'
+        this.description = 'Carregar dados da pasta Notion exportada e descompactada'
         this.baseClasses = [this.type]
         this.inputs = [
             {

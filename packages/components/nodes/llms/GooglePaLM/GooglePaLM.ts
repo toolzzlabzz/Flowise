@@ -21,7 +21,7 @@ class GooglePaLM_LLMs implements INode {
         this.type = 'GooglePaLM'
         this.icon = 'Google_PaLM_Logo.svg'
         this.category = 'LLMs'
-        this.description = 'Wrapper around Google MakerSuite PaLM large language models'
+        this.description = 'Wrapper em torno dos modelos de linguagem grande do Google MakerSuite PaLM'
         this.baseClasses = [this.type, ...getBaseClasses(GooglePaLM)]
         this.credential = {
             label: 'Connect Credential',

@@ -22,7 +22,7 @@ class ZapierNLA_Tools implements INode {
         this.type = 'ZapierNLA'
         this.icon = 'zapier.svg'
         this.category = 'Tools'
-        this.description = "Access to apps and actions on Zapier's platform through a natural language API interface"
+        this.description = 'Acesso a aplicativos e ações na plataforma Zapier através de uma interface API de linguagem natural'
         this.inputs = []
         this.credential = {
             label: 'Connect Credential',

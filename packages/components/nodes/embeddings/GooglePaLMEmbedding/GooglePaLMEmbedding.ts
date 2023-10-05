@@ -21,7 +21,7 @@ class GooglePaLMEmbedding_Embeddings implements INode {
         this.type = 'GooglePaLMEmbeddings'
         this.icon = 'Google_PaLM_Logo.svg'
         this.category = 'Embeddings'
-        this.description = 'Google MakerSuite PaLM API to generate embeddings for a given text'
+        this.description = 'API Google MakerSuite PaLM para gerar embeddings para um determinado texto'
         this.baseClasses = [this.type, ...getBaseClasses(GooglePaLMEmbeddings)]
         this.credential = {
             label: 'Connect Credential',

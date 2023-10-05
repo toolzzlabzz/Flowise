@@ -25,7 +25,7 @@ class SingleStoreUpsert_VectorStores implements INode {
         this.type = 'SingleStore'
         this.icon = 'singlestore.svg'
         this.category = 'Vector Stores'
-        this.description = 'Upsert documents to SingleStore'
+        this.description = 'Enviar documentos para o SingleStore'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.credential = {
             label: 'Connect Credential',

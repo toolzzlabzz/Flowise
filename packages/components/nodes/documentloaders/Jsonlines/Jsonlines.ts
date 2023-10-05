@@ -20,7 +20,7 @@ class Jsonlines_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'jsonlines.svg'
         this.category = 'Document Loaders'
-        this.description = `Load data from JSON Lines files`
+        this.description = `Carregador dados JSON Lines files`
         this.baseClasses = [this.type]
         this.inputs = [
             {

@@ -22,7 +22,8 @@ class NotionDB_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'notion.png'
         this.category = 'Document Loaders'
-        this.description = 'Load data from Notion Database (each row is a separate document with all properties as metadata)'
+        this.description =
+            'Carregar dados de um Notion Database (cada linha é um documento separado com todas as propriedades como metadados)'
         this.baseClasses = [this.type]
         this.credential = {
             label: 'Connect Credential',

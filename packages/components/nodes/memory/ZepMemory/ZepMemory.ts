@@ -23,7 +23,7 @@ class ZepMemory_Memory implements INode {
         this.type = 'ZepMemory'
         this.icon = 'zep.png'
         this.category = 'Memory'
-        this.description = 'Summarizes the conversation and stores the memory in zep server'
+        this.description = 'Resume a conversa e armazena a memória no servidor Zep'
         this.baseClasses = [this.type, ...getBaseClasses(ZepMemory)]
         this.credential = {
             label: 'Connect Credential',

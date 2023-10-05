@@ -22,7 +22,7 @@ class VectaraExisting_VectorStores implements INode {
         this.type = 'Vectara'
         this.icon = 'vectara.png'
         this.category = 'Vector Stores'
-        this.description = 'Load existing index from Vectara (i.e: Document has been upserted)'
+        this.description = 'Carregar índice existente do Vectara'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.credential = {
             label: 'Connect Credential',
@@ -34,8 +34,7 @@ class VectaraExisting_VectorStores implements INode {
             {
                 label: 'Vectara Metadata Filter',
                 name: 'filter',
-                description:
-                    'Filter to apply to Vectara metadata',
+                description: 'Filter to apply to Vectara metadata',
                 type: 'string',
                 additionalParams: true,
                 optional: true

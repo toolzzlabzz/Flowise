@@ -22,7 +22,7 @@ class Playwright_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'playwright.svg'
         this.category = 'Document Loaders'
-        this.description = `Load data from webpages`
+        this.description = `Carregar dados de páginas da web`
         this.baseClasses = [this.type]
         this.inputs = [
             {

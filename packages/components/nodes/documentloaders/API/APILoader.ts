@@ -22,7 +22,7 @@ class API_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'api-loader.png'
         this.category = 'Document Loaders'
-        this.description = `Load data from an API`
+        this.description = `Carregar dados de uma API`
         this.baseClasses = [this.type]
         this.inputs = [
             {

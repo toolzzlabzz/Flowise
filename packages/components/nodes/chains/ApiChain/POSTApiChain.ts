@@ -23,7 +23,7 @@ class POSTApiChain_Chains implements INode {
         this.type = 'POSTApiChain'
         this.icon = 'apichain.svg'
         this.category = 'Chains'
-        this.description = 'Chain to run queries against POST API'
+        this.description = 'Cadeia para executar consultas na API POST'
         this.baseClasses = [this.type, ...getBaseClasses(APIChain)]
         this.inputs = [
             {

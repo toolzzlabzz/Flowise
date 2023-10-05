@@ -22,7 +22,7 @@ class GoogleVertexAI_ChatModels implements INode {
         this.type = 'ChatGoogleVertexAI'
         this.icon = 'vertexai.svg'
         this.category = 'Chat Models'
-        this.description = 'Wrapper around VertexAI large language models that use the Chat endpoint'
+        this.description = 'Wrapper em torno de modelos de linguagem grande VertexAI que usam o Chat endpoint'
         this.baseClasses = [this.type, ...getBaseClasses(ChatGoogleVertexAI)]
         this.credential = {
             label: 'Connect Credential',

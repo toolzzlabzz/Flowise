@@ -25,7 +25,7 @@ class Zep_Existing_VectorStores implements INode {
         this.type = 'Zep'
         this.icon = 'zep.png'
         this.category = 'Vector Stores'
-        this.description = 'Load existing index from Zep (i.e: Document has been upserted)'
+        this.description = 'Carregar índice existente do Zep'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.credential = {
             label: 'Connect Credential',

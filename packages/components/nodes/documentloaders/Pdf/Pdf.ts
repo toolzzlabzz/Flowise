@@ -20,7 +20,7 @@ class Pdf_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'pdf.svg'
         this.category = 'Document Loaders'
-        this.description = `Load data from PDF files`
+        this.description = `Carregar dados de arquivos PDF`
         this.baseClasses = [this.type]
         this.inputs = [
             {

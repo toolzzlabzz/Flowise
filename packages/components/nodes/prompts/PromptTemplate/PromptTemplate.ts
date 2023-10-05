@@ -20,7 +20,7 @@ class PromptTemplate_Prompts implements INode {
         this.type = 'PromptTemplate'
         this.icon = 'prompt.svg'
         this.category = 'Prompts'
-        this.description = 'Schema to represent a basic prompt for an LLM'
+        this.description = 'Esquema para representar um prompt básico para um LLM'
         this.baseClasses = [...getBaseClasses(PromptTemplate)]
         this.inputs = [
             {

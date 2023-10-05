@@ -21,7 +21,7 @@ class Figma_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'figma.svg'
         this.category = 'Document Loaders'
-        this.description = 'Load data from a Figma file'
+        this.description = 'Carregar dados de um arquivo Figma'
         this.baseClasses = [this.type]
         this.credential = {
             label: 'Connect Credential',

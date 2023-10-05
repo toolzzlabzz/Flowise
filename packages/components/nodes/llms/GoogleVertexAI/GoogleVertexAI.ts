@@ -22,7 +22,7 @@ class GoogleVertexAI_LLMs implements INode {
         this.type = 'GoogleVertexAI'
         this.icon = 'vertexai.svg'
         this.category = 'LLMs'
-        this.description = 'Wrapper around GoogleVertexAI large language models'
+        this.description = 'Wrapper em torno de modelos de linguagem grande GoogleVertexAI'
         this.baseClasses = [this.type, ...getBaseClasses(GoogleVertexAI)]
         this.credential = {
             label: 'Connect Credential',

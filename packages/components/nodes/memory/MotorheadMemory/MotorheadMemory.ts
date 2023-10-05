@@ -23,7 +23,7 @@ class MotorMemory_Memory implements INode {
         this.type = 'MotorheadMemory'
         this.icon = 'motorhead.png'
         this.category = 'Memory'
-        this.description = 'Use Motorhead Memory to store chat conversations'
+        this.description = 'Use o Motorhead Memory para armazenar conversas de bate-papo'
         this.baseClasses = [this.type, ...getBaseClasses(MotorheadMemory)]
         this.credential = {
             label: 'Connect Credential',

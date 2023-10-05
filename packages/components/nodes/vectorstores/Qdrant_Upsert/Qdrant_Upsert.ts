@@ -29,7 +29,7 @@ class QdrantUpsert_VectorStores implements INode {
         this.type = 'Qdrant'
         this.icon = 'qdrant.png'
         this.category = 'Vector Stores'
-        this.description = 'Upsert documents to Qdrant'
+        this.description = 'Enviar documentos para Qdrant'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.credential = {
             label: 'Connect Credential',

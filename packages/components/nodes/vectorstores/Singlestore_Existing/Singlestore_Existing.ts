@@ -23,7 +23,7 @@ class SingleStoreExisting_VectorStores implements INode {
         this.type = 'SingleStore'
         this.icon = 'singlestore.svg'
         this.category = 'Vector Stores'
-        this.description = 'Load existing document from SingleStore'
+        this.description = 'Carregar índice existente do SingleStore'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.credential = {
             label: 'Connect Credential',
