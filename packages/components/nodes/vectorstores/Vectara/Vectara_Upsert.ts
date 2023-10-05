@@ -46,7 +46,7 @@ class VectaraUpsert_VectorStores implements INode {
                 label: 'Metadata Filter',
                 name: 'filter',
                 description:
-                    'Filter to apply to Vectara metadata. Refer to the <a target="_blank" href="https://docs.flowiseai.com/vector-stores/vectara">documentation</a> on how to use Vectara filters with Flowise.',
+                    'Filter to apply to Vectara metadata.',
                 type: 'string',
                 additionalParams: true,
                 optional: true
