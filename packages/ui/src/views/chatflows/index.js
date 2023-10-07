@@ -10,7 +10,7 @@ import { useTheme } from '@mui/material/styles'
 import MainCard from 'ui-component/cards/MainCard'
 import ItemCard from 'ui-component/cards/ItemCard'
 import { gridSpacing } from 'store/constant'
-import WorkflowEmptySVG from 'https://media.discordapp.net/attachments/915691669234548746/1160072303820931083/image.png'
+import WorkflowEmptySVG from 'assets/images/empy.png'
 import { StyledButton } from 'ui-component/button/StyledButton'
 import LoginDialog from 'ui-component/dialog/LoginDialog'
 
