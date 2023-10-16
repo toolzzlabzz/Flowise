@@ -1,5 +1,5 @@
 import { ICommonObject, INode, INodeData, INodeOutputsValue, INodeParams } from '../../../src/Interface'
-import { PineconeClient } from '@pinecone-database/pinecone'
+import { Pinecone } from '@pinecone-database/pinecone'
 import { PineconeLibArgs, PineconeStore } from 'langchain/vectorstores/pinecone'
 import { Embeddings } from 'langchain/embeddings/base'
 import { getBaseClasses, getCredentialData, getCredentialParam } from '../../../src/utils'
@@ -95,8 +95,7 @@ class Pinecone_Existing_VectorStores implements INode {
         const pineconeApiKey = getCredentialParam('pineconeApiKey', credentialData, nodeData)
         const pineconeEnv = getCredentialParam('pineconeEnv', credentialData, nodeData)
 
-        const client = new PineconeClient()
-        await client.init({
+        const client = new Pinecone({
             apiKey: pineconeApiKey,
             environment: pineconeEnv
         })
