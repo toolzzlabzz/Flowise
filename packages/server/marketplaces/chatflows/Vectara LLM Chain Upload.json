@@ -32,7 +32,7 @@
                         "id": "vectaraUpload_0-input-file-file"
                     },
                     {
-                        "label": "Vectara Metadata Filter",
+                        "label": "Metadata Filter",
                         "name": "filter",
                         "description": "Filter to apply to Vectara metadata",
                         "type": "string",
