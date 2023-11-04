@@ -40,7 +40,7 @@ class BufferWindowMemory_Memory implements INode {
                 name: 'k',
                 type: 'number',
                 default: '4',
-                description: 'Window of size k to surface the last k back-and-forths to use as memory.'
+                description: 'Window of size k to surface the last k back-and-forth to use as memory.'
             }
         ]
     }
