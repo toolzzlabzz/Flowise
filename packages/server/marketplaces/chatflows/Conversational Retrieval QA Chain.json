@@ -1,5 +1,6 @@
 {
     "description": "QnA de arquivo de texto usando cadeia de controle de qualidade de recuperação conversacional",
+    "badge": "POPULAR",
     "nodes": [
         {
             "width": 300,

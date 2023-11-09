@@ -1,5 +1,6 @@
 {
     "description": "Agente otimizado para recuperação de vetores durante conversas e resposta a perguntas com base em diálogos anteriores.",
+    "badge": "POPULAR",
     "nodes": [
         {
             "width": 300,
