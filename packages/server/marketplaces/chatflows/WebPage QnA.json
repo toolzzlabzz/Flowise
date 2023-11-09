@@ -1,5 +1,6 @@
 {
     "description": "Raspe páginas da web para QnA com memória de longo prazo Motorhead e retorne documentos de origem",
+    "badge": "POPULAR",
     "nodes": [
         {
             "width": 300,
