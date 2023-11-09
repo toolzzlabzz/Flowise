@@ -6,7 +6,6 @@ import { ModifyTool1694001465232 } from './1694001465232-ModifyTool'
 import { AddApiConfig1694099200729 } from './1694099200729-AddApiConfig'
 import { AddAnalytic1694432361423 } from './1694432361423-AddAnalytic'
 import { AddChatHistory1694658767766 } from './1694658767766-AddChatHistory'
-import { AddAssistantEntity1699325775451 } from './1699325775451-AddAssistantEntity'
 
 export const mysqlMigrations = [
     Init1693840429259,
@@ -16,6 +15,5 @@ export const mysqlMigrations = [
     ModifyTool1694001465232,
     AddApiConfig1694099200729,
     AddAnalytic1694432361423,
-    AddChatHistory1694658767766,
-    AddAssistantEntity1699325775451
+    AddChatHistory1694658767766
 ]

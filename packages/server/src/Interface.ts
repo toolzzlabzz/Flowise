@@ -48,15 +48,6 @@ export interface ITool {
     createdDate: Date
 }
 
-export interface IAssistant {
-    id: string
-    details: string
-    credential: string
-    iconSrc?: string
-    updatedDate: Date
-    createdDate: Date
-}
-
 export interface ICredential {
     id: string
     name: string
