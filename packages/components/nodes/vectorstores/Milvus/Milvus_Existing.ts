@@ -13,6 +13,7 @@ class Milvus_Existing_VectorStores implements INode {
     type: string
     icon: string
     category: string
+    badge: string
     baseClasses: string[]
     inputs: INodeParams[]
     credential: INodeParams
@@ -27,6 +28,7 @@ class Milvus_Existing_VectorStores implements INode {
         this.category = 'Vector Stores'
         this.description = 'Carregar coleção existente do Milvus (ou seja: o documento foi importado)'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
+        this.badge = 'DEPRECATING'
         this.credential = {
             label: 'Connect Credential',
             name: 'credential',

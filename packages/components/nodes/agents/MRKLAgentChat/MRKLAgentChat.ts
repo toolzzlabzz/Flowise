@@ -18,7 +18,7 @@ class MRKLAgentChat_Agents implements INode {
     inputs: INodeParams[]
 
     constructor() {
-        this.label = 'MRKL Agent for Chat Models'
+        this.label = 'ReAct Agent for Chat Models'
         this.name = 'mrklAgentChat'
         this.version = 1.0
         this.type = 'AgentExecutor'
