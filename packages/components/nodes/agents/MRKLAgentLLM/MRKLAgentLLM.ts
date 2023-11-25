@@ -18,7 +18,7 @@ class MRKLAgentLLM_Agents implements INode {
     inputs: INodeParams[]
 
     constructor() {
-        this.label = 'MRKL Agent for LLMs'
+        this.label = 'ReAct Agent for LLMs'
         this.name = 'mrklAgentLLM'
         this.version = 1.0
         this.type = 'AgentExecutor'

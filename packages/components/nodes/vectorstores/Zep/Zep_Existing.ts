@@ -13,6 +13,7 @@ class Zep_Existing_VectorStores implements INode {
     type: string
     icon: string
     category: string
+    badge: string
     baseClasses: string[]
     inputs: INodeParams[]
     credential: INodeParams
@@ -27,6 +28,7 @@ class Zep_Existing_VectorStores implements INode {
         this.category = 'Vector Stores'
         this.description = 'Carregar índice existente do Zep'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
+        this.badge = 'DEPRECATING'
         this.credential = {
             label: 'Connect Credential',
             name: 'credential',
