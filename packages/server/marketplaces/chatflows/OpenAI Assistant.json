@@ -1,5 +1,5 @@
 {
-    "description": "OpenAI Assistant that has instructions and can leverage models, tools, and knowledge to respond to user queries",
+    "description": "Assistente da OpenAI com instruções que pode utilizar modelos, ferramentas e conhecimento para responder às perguntas dos usuários",
     "badge": "NEW",
     "nodes": [
         {
@@ -19,10 +19,10 @@
                 "type": "OpenAIAssistant",
                 "baseClasses": ["OpenAIAssistant"],
                 "category": "Agents",
-                "description": "An agent that uses OpenAI Assistant API to pick the tool and args to call",
+                "description": "Um agente que utiliza a API do OpenAI Assistant para selecionar a ferramenta e os argumentos a serem chamados",
                 "inputParams": [
                     {
-                        "label": "Select Assistant",
+                        "label": "Selecione um assistente",
                         "name": "selectedAssistant",
                         "type": "asyncOptions",
                         "loadMethod": "listAssistants",

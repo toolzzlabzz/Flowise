@@ -21,7 +21,7 @@ class UnstructuredFolder_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'unstructured.png'
         this.category = 'Document Loaders'
-        this.description = 'Use Unstructured.io to load data from a folder'
+        this.description = 'Utilizar Unstructured.io para carregar dados a partir de pasta de arquivo'
         this.baseClasses = [this.type]
         this.credential = {
             label: 'Connect Credential',

@@ -25,7 +25,7 @@ class Elasticsearch_VectorStores implements INode {
         this.name = 'elasticsearch'
         this.version = 1.0
         this.description =
-            'Upsert embedded data and perform similarity search upon query using Elasticsearch, a distributed search and analytics engine'
+            'Atualizar ou inserir dados incorporados e realizar uma pesquisa de similaridade durante uma consulta usando o Elasticsearch, um motor de busca e análise distribuído'
         this.type = 'Elasticsearch'
         this.icon = 'elasticsearch.png'
         this.category = 'Vector Stores'

@@ -25,7 +25,8 @@ class Faiss_VectorStores implements INode {
         this.type = 'Faiss'
         this.icon = 'faiss.svg'
         this.category = 'Vector Stores'
-        this.description = 'Upsert embedded data and perform similarity search upon query using Faiss library from Meta'
+        this.description =
+            'Atualizar ou inserir dados incorporados e realizar uma pesquisa de similaridade durante uma consulta usando a biblioteca Faiss da Meta'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'NEW'
         this.inputs = [

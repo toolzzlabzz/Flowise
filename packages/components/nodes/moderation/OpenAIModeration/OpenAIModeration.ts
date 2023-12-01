@@ -22,7 +22,7 @@ class OpenAIModeration implements INode {
         this.type = 'Moderation'
         this.icon = 'openai.png'
         this.category = 'Moderation'
-        this.description = 'Check whether content complies with OpenAI usage policies.'
+        this.description = 'Verificar se o conteúdo está em conformidade com as políticas de uso da OpenAI.'
         this.baseClasses = [this.type, ...getBaseClasses(Moderation)]
         this.credential = {
             label: 'Connect Credential',

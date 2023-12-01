@@ -46,19 +46,19 @@ export const FlowListTable = ({ data, images, filterFunction, updateFlowsApi }) 
                     <TableHead>
                         <TableRow sx={{ marginTop: '10', backgroundColor: 'primary' }}>
                             <StyledTableCell component='th' scope='row' style={{ width: '20%' }} key='0'>
-                                Name
+                                Nome
                             </StyledTableCell>
                             <StyledTableCell style={{ width: '25%' }} key='1'>
-                                Category
+                                Categoria
                             </StyledTableCell>
                             <StyledTableCell style={{ width: '30%' }} key='2'>
                                 Nodes
                             </StyledTableCell>
                             <StyledTableCell style={{ width: '15%' }} key='3'>
-                                Last Modified Date
+                                Ultima data de modificação
                             </StyledTableCell>
                             <StyledTableCell style={{ width: '10%' }} key='4'>
-                                Actions
+                                Ações
                             </StyledTableCell>
                         </TableRow>
                     </TableHead>

@@ -82,7 +82,7 @@ const Credentials = () => {
 
     const listCredential = () => {
         const dialogProp = {
-            title: 'Add New Credential',
+            title: 'Adicionar nova Credencial',
             componentsCredentials
         }
         setCredentialListDialogProps(dialogProp)
@@ -114,7 +114,7 @@ const Credentials = () => {
     const deleteCredential = async (credential) => {
         const confirmPayload = {
             title: `Delete`,
-            description: `Delete credential ${credential.name}?`,
+            description: `Deletar credencial ${credential.name}?`,
             confirmButtonName: 'Delete',
             cancelButtonName: 'Cancel'
         }
@@ -125,7 +125,7 @@ const Credentials = () => {
                 const deleteResp = await credentialsApi.deleteCredential(credential.id)
                 if (deleteResp.data) {
                     enqueueSnackbar({
-                        message: 'Credential deleted',
+                        message: 'Credencial deleta',
                         options: {
                             key: new Date().getTime() + Math.random(),
                             variant: 'success',
@@ -141,7 +141,7 @@ const Credentials = () => {
             } catch (error) {
                 const errorData = error.response.data || `${error.response.status}: ${error.response.statusText}`
                 enqueueSnackbar({
-                    message: `Failed to delete Credential: ${errorData}`,
+                    message: `Erro ao deletar Credencial: ${errorData}`,
                     options: {
                         key: new Date().getTime() + Math.random(),
                         variant: 'error',
@@ -209,7 +209,7 @@ const Credentials = () => {
                                 size='small'
                                 sx={{ display: { xs: 'none', sm: 'block' }, ml: 3 }}
                                 variant='outlined'
-                                placeholder='Search credential name'
+                                placeholder='Procurar nome da credencial'
                                 onChange={onSearchChange}
                                 InputProps={{
                                     startAdornment: (
@@ -233,7 +233,7 @@ const Credentials = () => {
                                         onClick={listCredential}
                                         startIcon={<IconPlus />}
                                     >
-                                        Add Credential
+                                        Adicionar Credencial
                                     </StyledButton>
                                 </ButtonGroup>
                             </ButtonGroup>
@@ -249,7 +249,7 @@ const Credentials = () => {
                                 alt='CredentialEmptySVG'
                             />
                         </Box>
-                        <div>No Credentials Yet</div>
+                        <div>Nenhuma Credencial por enquanto</div>
                     </Stack>
                 )}
                 {credentials.length > 0 && (
@@ -257,9 +257,9 @@ const Credentials = () => {
                         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Name</TableCell>
-                                    <TableCell>Last Updated</TableCell>
-                                    <TableCell>Created</TableCell>
+                                    <TableCell>Nome</TableCell>
+                                    <TableCell>Ultima Atualização</TableCell>
+                                    <TableCell>Criado</TableCell>
                                     <TableCell> </TableCell>
                                     <TableCell> </TableCell>
                                 </TableRow>

@@ -1,5 +1,5 @@
 {
-    "description": "Detect text that could generate harmful output and prevent it from being sent to the language model",
+    "description": "Identifique um texto que possa resultar conteúdo prejudicial e impeça que seja enviado para o modelo de linguagem.",
     "badge": "NEW",
     "nodes": [
         {

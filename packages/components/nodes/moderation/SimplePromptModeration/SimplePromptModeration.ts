@@ -21,7 +21,7 @@ class SimplePromptModeration implements INode {
         this.type = 'Moderation'
         this.icon = 'simple_moderation.png'
         this.category = 'Moderation'
-        this.description = 'Check whether input consists of any text from Deny list, and prevent being sent to LLM'
+        this.description = 'Verificar se a entrada contém algum texto da lista de negação e impedir que seja enviado ao modelo de linguagem'
         this.baseClasses = [this.type, ...getBaseClasses(Moderation)]
         this.inputs = [
             {

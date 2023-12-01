@@ -1,5 +1,5 @@
 {
-    "description": "Answer questions over a SQL database",
+    "description": "Responda perguntas sobre um banco de dados SQL",
     "nodes": [
         {
             "width": 300,

@@ -12,7 +12,7 @@ class ElasicsearchExisting_VectorStores extends ElasticSearchBase implements INo
         this.label = 'Elasticsearch Load Existing Index'
         this.name = 'ElasticsearchIndex'
         this.version = 1.0
-        this.description = 'Load existing index from Elasticsearch (i.e: Document has been upserted)'
+        this.description = 'Carregar um índice existente do Elasticsearch (ou seja, o documento foi atualizado)'
     }
 
     async constructVectorStore(

@@ -32,7 +32,7 @@ class MongoDB_Memory implements INode {
         this.type = 'MongoDBAtlasChatMemory'
         this.icon = 'mongodb.png'
         this.category = 'Memory'
-        this.description = 'Stores the conversation in MongoDB Atlas'
+        this.description = 'Armazena a conversa no MongoDB Atlas'
         this.baseClasses = [this.type, ...getBaseClasses(BufferMemory)]
         this.credential = {
             label: 'Connect Credential',

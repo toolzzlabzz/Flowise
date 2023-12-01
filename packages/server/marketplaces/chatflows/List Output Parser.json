@@ -1,5 +1,5 @@
 {
-    "description": "Return response as a list (array) instead of a string/text",
+    "description": "Retorne uma resposta como uma lista de arrays em vez de uma string/texto",
     "badge": "NEW",
     "nodes": [
         {

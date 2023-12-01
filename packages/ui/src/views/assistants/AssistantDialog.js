@@ -516,8 +516,13 @@ const AssistantDialog = ({ show, dialogProps, onCancel, onConfirm }) => {
             </DialogContent>
             <DialogActions>
                 {dialogProps.type === 'EDIT' && (
-                    <StyledButton color='error' variant='contained' onClick={() => deleteAssistant()}>
-                        Delete
+                    <StyledButton color='secondary' variant='contained' onClick={() => onSyncClick()}>
+                        Sincronizar
+                    </StyledButton>
+                )}
+                {dialogProps.type === 'EDIT' && (
+                    <StyledButton color='error' variant='contained' onClick={() => onDeleteClick()}>
+                        Deletar
                     </StyledButton>
                 )}
                 <StyledButton

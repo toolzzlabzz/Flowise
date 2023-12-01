@@ -13,7 +13,7 @@ class ElasicsearchUpsert_VectorStores extends ElasticSearchBase implements INode
         this.label = 'Elasticsearch Upsert Document'
         this.name = 'ElasticsearchUpsert'
         this.version = 1.0
-        this.description = 'Upsert documents to Elasticsearch'
+        this.description = 'Atualizar ou inserir documentos no Elasticsearch'
         this.inputs.unshift({
             label: 'Document',
             name: 'document',

@@ -15,11 +15,11 @@ class InMemoryCache implements INode {
     credential: INodeParams
 
     constructor() {
-        this.label = 'InMemory Cache'
+        this.label = 'Cache em Memoria'
         this.name = 'inMemoryCache'
         this.version = 1.0
         this.type = 'InMemoryCache'
-        this.description = 'Cache LLM response in memory, will be cleared once app restarted'
+        this.description = 'Armazene em memoria o cache da resposta do LLM, sera limpo quando o app for reiniciado'
         this.icon = 'inmemorycache.png'
         this.category = 'Cache'
         this.baseClasses = [this.type, ...getBaseClasses(InMemoryCacheExtended)]

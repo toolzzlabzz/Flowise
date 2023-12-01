@@ -1,5 +1,5 @@
 {
-    "description": "Carregue o índice existente com filtros de metadados e alimente a cadeia de controle de qualidade de recuperação conversacional",
+    "description": "Interaja com fontes de dados como Transcrições do YouTube, Google e outras, por meio de interações inteligentes de perguntas e respostas.",
     "nodes": [
         {
             "width": 300,
