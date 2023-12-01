@@ -38,7 +38,7 @@ const Assistants = () => {
 
     const loadExisting = () => {
         const dialogProp = {
-            title: 'Load Existing Assistant'
+            title: 'Importar um Assistant ja existente'
         }
         setLoadDialogProps(dialogProp)
         setShowLoadDialog(true)
@@ -51,7 +51,7 @@ const Assistants = () => {
 
     const addNew = (selectedOpenAIAssistantId, credential) => {
         const dialogProp = {
-            title: 'Add New Assistant',
+            title: 'Adicionar novo Assistant',
             type: 'ADD',
             cancelButtonName: 'Cancel',
             confirmButtonName: 'Add',
@@ -64,7 +64,7 @@ const Assistants = () => {
 
     const edit = (selectedAssistant) => {
         const dialogProp = {
-            title: 'Edit Assistant',
+            title: 'Editar Assistant',
             type: 'EDIT',
             cancelButtonName: 'Cancel',
             confirmButtonName: 'Save',
@@ -94,10 +94,10 @@ const Assistants = () => {
                         <Box sx={{ flexGrow: 1 }} />
                         <Grid item>
                             <Button variant='outlined' sx={{ mr: 2 }} onClick={loadExisting} startIcon={<IconFileImport />}>
-                                Load
+                                Importar
                             </Button>
                             <StyledButton variant='contained' sx={{ color: 'white' }} onClick={addNew} startIcon={<IconPlus />}>
-                                Add
+                                Criar
                             </StyledButton>
                         </Grid>
                     </Grid>
@@ -123,7 +123,7 @@ const Assistants = () => {
                         <Box sx={{ p: 2, height: 'auto' }}>
                             <img style={{ objectFit: 'cover', height: '30vh', width: 'auto' }} src={ToolEmptySVG} alt='ToolEmptySVG' />
                         </Box>
-                        <div>No Assistants Added Yet</div>
+                        <div>Nenhum Assistant criado por enquanto</div>
                     </Stack>
                 )}
             </MainCard>

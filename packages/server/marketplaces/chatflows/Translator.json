@@ -1,5 +1,5 @@
 {
-    "description": "Language translation using LLM Chain with a Chat Prompt Template and Chat Model",
+    "description": "Tradução de idiomas usando uma LLM (Large Language Model), com um modelo e um template de conversação.",
     "nodes": [
         {
             "width": 300,

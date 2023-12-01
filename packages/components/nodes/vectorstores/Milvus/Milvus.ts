@@ -31,7 +31,7 @@ class Milvus_VectorStores implements INode {
         this.type = 'Milvus'
         this.icon = 'milvus.svg'
         this.category = 'Vector Stores'
-        this.description = `Upsert embedded data and perform similarity search upon query using Milvus, world's most advanced open-source vector database`
+        this.description = `Atualizar ou inserir dados incorporados e realizar uma pesquisa de similaridade durante uma consulta usando o Milvus, o banco de dados de vetores de código aberto mais avançado do mundo`
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'NEW'
         this.credential = {

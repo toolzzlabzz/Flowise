@@ -20,7 +20,7 @@ class CSVListOutputParser implements INode {
         this.name = 'csvOutputParser'
         this.version = 1.0
         this.type = 'CSVListOutputParser'
-        this.description = 'Parse the output of an LLM call as a comma-separated list of values'
+        this.description = 'Analisar a saída de uma chamada ao modelo de linguagem como uma lista de valores separados por vírgulas'
         this.icon = 'csv.png'
         this.category = CATEGORY
         this.baseClasses = [this.type, ...getBaseClasses(BaseOutputParser)]

@@ -22,7 +22,7 @@ class AWSBedrockEmbedding_Embeddings implements INode {
         this.type = 'AWSBedrockEmbeddings'
         this.icon = 'awsBedrock.png'
         this.category = 'Embeddings'
-        this.description = 'AWSBedrock embedding models to generate embeddings for a given text'
+        this.description = 'Utilize modelos de incorporação no AWS para gerar incorporações para um texto específico.'
         this.baseClasses = [this.type, ...getBaseClasses(BedrockEmbeddings)]
         this.credential = {
             label: 'AWS Credential',

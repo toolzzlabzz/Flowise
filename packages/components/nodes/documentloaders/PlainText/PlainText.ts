@@ -22,7 +22,7 @@ class PlainText_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'plaintext.svg'
         this.category = 'Document Loaders'
-        this.description = `Load data from plain text`
+        this.description = `Importe dados a partir de um texto`
         this.baseClasses = [this.type]
         this.inputs = [
             {

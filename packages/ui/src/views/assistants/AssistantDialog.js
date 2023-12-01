@@ -617,12 +617,12 @@ const AssistantDialog = ({ show, dialogProps, onCancel, onConfirm }) => {
             <DialogActions>
                 {dialogProps.type === 'EDIT' && (
                     <StyledButton color='secondary' variant='contained' onClick={() => onSyncClick()}>
-                        Sync
+                        Sincronizar
                     </StyledButton>
                 )}
                 {dialogProps.type === 'EDIT' && (
                     <StyledButton color='error' variant='contained' onClick={() => onDeleteClick()}>
-                        Delete
+                        Deletar
                     </StyledButton>
                 )}
                 <StyledButton

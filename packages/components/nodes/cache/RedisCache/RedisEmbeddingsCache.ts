@@ -21,7 +21,7 @@ class RedisEmbeddingsCache implements INode {
         this.name = 'redisEmbeddingsCache'
         this.version = 1.0
         this.type = 'RedisEmbeddingsCache'
-        this.description = 'Cache generated Embeddings in Redis to avoid needing to recompute them.'
+        this.description = 'Armazene em Cache as Incorporações Geradas no Redis para Evitar a Necessidade de Recomputá-las.'
         this.icon = 'redis.svg'
         this.category = 'Cache'
         this.baseClasses = [this.type, ...getBaseClasses(CacheBackedEmbeddings)]

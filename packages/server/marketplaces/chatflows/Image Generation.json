@@ -1,5 +1,5 @@
 {
-    "description": "Generate image using Replicate Stability text-to-image generative AI model",
+    "description": "Gere uma imagem usando o modelo de inteligência artificial gerativo de texto para imagem 'Replicate Stability'",
     "badge": "NEW",
     "nodes": [
         {

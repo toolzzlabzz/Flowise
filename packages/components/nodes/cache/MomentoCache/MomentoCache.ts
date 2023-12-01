@@ -19,7 +19,7 @@ class MomentoCache implements INode {
         this.name = 'momentoCache'
         this.version = 1.0
         this.type = 'MomentoCache'
-        this.description = 'Cache LLM response using Momento, a distributed, serverless cache'
+        this.description = 'Armazenar em Cache a Resposta do Modelo de Linguagem usando o Momento, um Cache Distribuído e Sem Servidor'
         this.icon = 'momento.png'
         this.category = 'Cache'
         this.baseClasses = [this.type, ...getBaseClasses(LangchainMomentoCache)]

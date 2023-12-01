@@ -52,7 +52,7 @@ class VectaraChain_Chains implements INode {
         this.type = 'VectaraQAChain'
         this.icon = 'vectara.png'
         this.category = 'Chains'
-        this.description = 'QA chain for Vectara'
+        this.description = 'Cadeia de Garantia de Qualidade para Vectara'
         this.baseClasses = [this.type, ...getBaseClasses(VectorDBQAChain)]
         this.inputs = [
             {

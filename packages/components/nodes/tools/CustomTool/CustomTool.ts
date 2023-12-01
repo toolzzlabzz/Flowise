@@ -22,7 +22,7 @@ class CustomTool_Tools implements INode {
         this.type = 'CustomTool'
         this.icon = 'customtool.svg'
         this.category = 'Tools'
-        this.description = `Use custom tool you've created in Toolzz AI within chatflow`
+        this.description = `Incorporar a ferramenta personalizada que você criou no Toolzz AI dentro do fluxo de chat.`
         this.inputs = [
             {
                 label: 'Select Tool',

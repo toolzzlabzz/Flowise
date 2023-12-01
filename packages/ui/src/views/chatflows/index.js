@@ -141,7 +141,7 @@ const Chatflows = () => {
                             size='small'
                             sx={{ display: { xs: 'none', sm: 'block' }, ml: 3 }}
                             variant='outlined'
-                            placeholder='Search name or category'
+                            placeholder='Busque por nome ou categoria'
                             onChange={onSearchChange}
                             InputProps={{
                                 startAdornment: (
@@ -177,7 +177,7 @@ const Chatflows = () => {
                             <Box sx={{ width: 5 }} />
                             <ButtonGroup disableElevation aria-label='outlined primary button group'>
                                 <StyledButton variant='contained' onClick={addNew} startIcon={<IconPlus />}>
-                                    Add New
+                                    Adicionar novo
                                 </StyledButton>
                             </ButtonGroup>
                         </ButtonGroup>
