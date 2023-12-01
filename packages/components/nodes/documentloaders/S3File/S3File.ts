@@ -34,7 +34,7 @@ class S3_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 's3.svg'
         this.category = 'Document Loaders'
-        this.description = 'Load Data from S3 Buckets'
+        this.description = 'Importe dados do S3 Buckets'
         this.baseClasses = [this.type]
         this.credential = {
             label: 'AWS Credential',

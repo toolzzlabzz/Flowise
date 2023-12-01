@@ -40,8 +40,8 @@ const Tools = () => {
             const dialogProp = {
                 title: 'Adicionar Novo Plugin',
                 type: 'IMPORT',
-                cancelButtonName: 'Cancel',
-                confirmButtonName: 'Save',
+                cancelButtonName: 'Cancelar',
+                confirmButtonName: 'Salvar',
                 data: JSON.parse(file)
             }
             setDialogProps(dialogProp)
@@ -80,10 +80,10 @@ const Tools = () => {
 
     const edit = (selectedTool) => {
         const dialogProp = {
-            title: 'Edit Tool',
+            title: 'Editar Ferramenta',
             type: 'EDIT',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Save',
+            cancelButtonName: 'Cancelar',
+            confirmButtonName: 'Salvar',
             data: selectedTool
         }
         setDialogProps(dialogProp)
@@ -115,11 +115,11 @@ const Tools = () => {
                                 onClick={() => inputRef.current.click()}
                                 startIcon={<IconFileImport />}
                             >
-                                Load
+                                Importar
                             </Button>
                             <input ref={inputRef} type='file' hidden accept='.json' onChange={(e) => handleFileUpload(e)} />
                             <StyledButton variant='contained' sx={{ color: 'white' }} onClick={addNew} startIcon={<IconPlus />}>
-                                Create
+                                Criar
                             </StyledButton>
                         </Grid>
                     </Grid>
@@ -138,7 +138,7 @@ const Tools = () => {
                         <Box sx={{ p: 2, height: 'auto' }}>
                             <img style={{ objectFit: 'cover', height: '30vh', width: 'auto' }} src={ToolEmptySVG} alt='ToolEmptySVG' />
                         </Box>
-                        <div>No Tools Created Yet</div>
+                        <div>Nenhuma ferramenta criada por enquanto</div>
                     </Stack>
                 )}
             </MainCard>

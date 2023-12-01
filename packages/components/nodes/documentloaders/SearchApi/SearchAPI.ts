@@ -24,7 +24,7 @@ class SearchAPI_DocumentLoaders implements INode {
         this.type = 'Document'
         this.icon = 'searchapi.svg'
         this.category = 'Document Loaders'
-        this.description = 'Load data from real-time search results'
+        this.description = 'Carregar dados a partir de resultados de pesquisa em tempo real'
         this.baseClasses = [this.type]
         this.credential = {
             label: 'Connect Credential',

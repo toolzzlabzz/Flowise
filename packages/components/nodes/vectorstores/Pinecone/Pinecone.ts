@@ -27,7 +27,7 @@ class Pinecone_VectorStores implements INode {
         this.type = 'Pinecone'
         this.icon = 'pinecone.png'
         this.category = 'Vector Stores'
-        this.description = `Upsert embedded data and perform similarity search upon query using Pinecone, a leading fully managed hosted vector database`
+        this.description = `Atualizar ou inserir dados incorporados e realizar uma pesquisa de similaridade durante uma consulta usando o Pinecone, um banco de dados de vetores totalmente gerenciado e hospedado líder`
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'NEW'
         this.credential = {

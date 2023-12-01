@@ -231,7 +231,7 @@ const APIKey = () => {
 
     const addNew = () => {
         const dialogProp = {
-            title: 'Add New API Key',
+            title: 'Adicionar Nova Chave',
             type: 'ADD',
             cancelButtonName: 'Cancel',
             confirmButtonName: 'Add'
@@ -242,7 +242,7 @@ const APIKey = () => {
 
     const edit = (key) => {
         const dialogProp = {
-            title: 'Edit API Key',
+            title: 'Editar Chave da API',
             type: 'EDIT',
             cancelButtonName: 'Cancel',
             confirmButtonName: 'Save',
@@ -340,7 +340,7 @@ const APIKey = () => {
                                 size='small'
                                 sx={{ display: { xs: 'none', sm: 'block' }, ml: 3 }}
                                 variant='outlined'
-                                placeholder='Search key name'
+                                placeholder='Procurar Nome da Chave'
                                 onChange={onSearchChange}
                                 InputProps={{
                                     startAdornment: (
@@ -364,7 +364,7 @@ const APIKey = () => {
                                         onClick={addNew}
                                         startIcon={<IconPlus />}
                                     >
-                                        Create Key
+                                        Criar Chave
                                     </StyledButton>
                                 </ButtonGroup>
                             </ButtonGroup>
@@ -376,7 +376,7 @@ const APIKey = () => {
                         <Box sx={{ p: 2, height: 'auto' }}>
                             <img style={{ objectFit: 'cover', height: '30vh', width: 'auto' }} src={APIEmptySVG} alt='APIEmptySVG' />
                         </Box>
-                        <div>No API Keys Yet</div>
+                        <div>Nenhuma Chave da API por enquanto</div>
                     </Stack>
                 )}
                 {apiKeys.length > 0 && (
@@ -384,10 +384,10 @@ const APIKey = () => {
                         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Key Name</TableCell>
-                                    <TableCell>API Key</TableCell>
-                                    <TableCell>Usage</TableCell>
-                                    <TableCell>Created</TableCell>
+                                    <TableCell>Nome da Chave</TableCell>
+                                    <TableCell>Chave da API</TableCell>
+                                    <TableCell>Utilização</TableCell>
+                                    <TableCell>Criada em</TableCell>
                                     <TableCell> </TableCell>
                                     <TableCell> </TableCell>
                                 </TableRow>

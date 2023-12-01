@@ -27,7 +27,8 @@ class Chroma_VectorStores implements INode {
         this.type = 'Chroma'
         this.icon = 'chroma.svg'
         this.category = 'Vector Stores'
-        this.description = 'Upsert embedded data and perform similarity search upon query using Chroma, an open-source embedding database'
+        this.description =
+            'Atualizar ou inserir dados incorporados e realizar uma pesquisa de similaridade durante uma consulta usando o Chroma, um banco de dados de incorporação de código aberto'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'NEW'
         this.credential = {

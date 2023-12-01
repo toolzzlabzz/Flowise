@@ -1,5 +1,5 @@
 {
-    "description": "Raspe páginas da web para QnA com memória de longo prazo Motorhead e retorne documentos de origem",
+    "description": "Extrair informações de páginas da web para criar uma base de conhecimento com o Motorhead de memória duradoura e fornecer documentos de referência",
     "badge": "POPULAR",
     "nodes": [
         {

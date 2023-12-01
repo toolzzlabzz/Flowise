@@ -63,7 +63,7 @@ const APIKeyDialog = ({ show, dialogProps, onCancel, onConfirm }) => {
             const createResp = await apikeyApi.createNewAPI({ keyName })
             if (createResp.data) {
                 enqueueSnackbar({
-                    message: 'New API key added',
+                    message: 'Nova Chave da API adicionada',
                     options: {
                         key: new Date().getTime() + Math.random(),
                         variant: 'success',
@@ -79,7 +79,7 @@ const APIKeyDialog = ({ show, dialogProps, onCancel, onConfirm }) => {
         } catch (error) {
             const errorData = error.response.data || `${error.response.status}: ${error.response.statusText}`
             enqueueSnackbar({
-                message: `Failed to add new API key: ${errorData}`,
+                message: `Erro para adicionar nova Chave da API: ${errorData}`,
                 options: {
                     key: new Date().getTime() + Math.random(),
                     variant: 'error',
@@ -100,7 +100,7 @@ const APIKeyDialog = ({ show, dialogProps, onCancel, onConfirm }) => {
             const saveResp = await apikeyApi.updateAPI(dialogProps.key.id, { keyName })
             if (saveResp.data) {
                 enqueueSnackbar({
-                    message: 'API Key saved',
+                    message: 'Chave Salva',
                     options: {
                         key: new Date().getTime() + Math.random(),
                         variant: 'success',
@@ -116,7 +116,7 @@ const APIKeyDialog = ({ show, dialogProps, onCancel, onConfirm }) => {
         } catch (error) {
             const errorData = error.response.data || `${error.response.status}: ${error.response.statusText}`
             enqueueSnackbar({
-                message: `Failed to save API key: ${errorData}`,
+                message: `Falha ao salvar Chave da API: ${errorData}`,
                 options: {
                     key: new Date().getTime() + Math.random(),
                     variant: 'error',
@@ -197,7 +197,7 @@ const APIKeyDialog = ({ show, dialogProps, onCancel, onConfirm }) => {
 
                 <Box sx={{ p: 2 }}>
                     <Stack sx={{ position: 'relative' }} direction='row'>
-                        <Typography variant='overline'>Key Name</Typography>
+                        <Typography variant='overline'>Nome da Chave</Typography>
                     </Stack>
                     <OutlinedInput
                         id='keyName'

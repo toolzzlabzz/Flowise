@@ -16,11 +16,11 @@ class InMemoryEmbeddingCache implements INode {
     credential: INodeParams
 
     constructor() {
-        this.label = 'InMemory Embedding Cache'
+        this.label = 'Cache de Incorporação em Memória'
         this.name = 'inMemoryEmbeddingCache'
         this.version = 1.0
         this.type = 'InMemoryEmbeddingCache'
-        this.description = 'Cache generated Embeddings in memory to avoid needing to recompute them.'
+        this.description = 'Armazenar em Cache as Incorporações Geradas na Memória para Evitar a Necessidade de Recomputá-las.'
         this.icon = 'inmemorycache.png'
         this.category = 'Cache'
         this.baseClasses = [this.type, ...getBaseClasses(CacheBackedEmbeddings)]

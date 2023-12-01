@@ -20,7 +20,7 @@ class CustomListOutputParser implements INode {
         this.name = 'customListOutputParser'
         this.version = 1.0
         this.type = 'CustomListOutputParser'
-        this.description = 'Parse the output of an LLM call as a list of values.'
+        this.description = 'Interpretar a saída de uma chamada ao modelo de linguagem como uma lista de valores.'
         this.icon = 'list.png'
         this.category = CATEGORY
         this.baseClasses = [this.type, ...getBaseClasses(BaseOutputParser)]

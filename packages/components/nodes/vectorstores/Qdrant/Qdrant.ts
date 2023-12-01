@@ -31,7 +31,7 @@ class Qdrant_VectorStores implements INode {
         this.icon = 'qdrant.png'
         this.category = 'Vector Stores'
         this.description =
-            'Upsert embedded data and perform similarity search upon query using Qdrant, a scalable open source vector database written in Rust'
+            'Atualizar ou inserir dados incorporados e realizar uma pesquisa de similaridade durante uma consulta usando o Qdrant, um banco de dados de vetores de código aberto escalável escrito em Rust'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']
         this.badge = 'NEW'
         this.credential = {

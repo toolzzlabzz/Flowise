@@ -13,7 +13,7 @@ class MongoDBUpsert_VectorStores extends MongoDBSearchBase implements INode {
         this.label = 'MongoDB Atlas Upsert Document'
         this.name = 'MongoDBUpsert'
         this.version = 1.0
-        this.description = 'Upsert documents to MongoDB Atlas'
+        this.description = 'Atualizar ou inserir documentos no MongoDB Atlas'
         this.inputs.unshift({
             label: 'Document',
             name: 'document',

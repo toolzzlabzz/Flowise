@@ -12,7 +12,7 @@ class MongoDBExisting_VectorStores extends MongoDBSearchBase implements INode {
         this.label = 'MongoDB Atlas Load Existing Index'
         this.name = 'MongoDBIndex'
         this.version = 1.0
-        this.description = 'Load existing data from MongoDB Atlas (i.e: Document has been upserted)'
+        this.description = 'Carregar dados existentes do MongoDB Atlas (ou seja, o documento foi atualizado ou inserido)'
     }
 
     async init(nodeData: INodeData, _: string, options: ICommonObject): Promise<any> {

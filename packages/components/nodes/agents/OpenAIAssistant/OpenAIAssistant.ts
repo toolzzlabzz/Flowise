@@ -27,17 +27,17 @@ class OpenAIAssistant_Agents implements INode {
         this.type = 'OpenAIAssistant'
         this.category = 'Agents'
         this.icon = 'openai.png'
-        this.description = `An agent that uses OpenAI Assistant API to pick the tool and args to call`
+        this.description = `Um agente que utiliza a API do OpenAI Assistant para selecionar a ferramenta e os argumentos a serem chamados`
         this.baseClasses = [this.type]
         this.inputs = [
             {
-                label: 'Select Assistant',
+                label: 'Selecione um Assistant',
                 name: 'selectedAssistant',
                 type: 'asyncOptions',
                 loadMethod: 'listAssistants'
             },
             {
-                label: 'Allowed Tools',
+                label: 'Ferramentas Permitidas',
                 name: 'tools',
                 type: 'Tool',
                 list: true

@@ -14,7 +14,7 @@ class RedisUpsert_VectorStores extends RedisSearchBase implements INode {
         this.label = 'Redis Upsert Document'
         this.name = 'RedisUpsert'
         this.version = 1.0
-        this.description = 'Upsert documents to Redis'
+        this.description = 'Atualizar ou inserir documentos no Redis'
         this.inputs.unshift({
             label: 'Document',
             name: 'document',
