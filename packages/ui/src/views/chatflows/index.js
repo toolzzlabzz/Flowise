@@ -10,8 +10,10 @@ import { useTheme } from '@mui/material/styles'
 import MainCard from 'ui-component/cards/MainCard'
 import ItemCard from 'ui-component/cards/ItemCard'
 import { gridSpacing } from 'store/constant'
-import WorkflowEmptySVG from 'assets/images/workflow_empty.svg'
+import WorkflowEmptySVG from 'assets/images/empty_chatflow.png'
+import { StyledButton } from 'ui-component/button/StyledButton'
 import LoginDialog from 'ui-component/dialog/LoginDialog'
+import ConfirmDialog from 'ui-component/dialog/ConfirmDialog'
 
 // API
 import chatflowsApi from 'api/chatflows'
@@ -27,7 +29,6 @@ import { IconPlus, IconSearch, IconLayoutGrid, IconList } from '@tabler/icons'
 import * as React from 'react'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import { FlowListTable } from '../../ui-component/table/FlowListTable'
-import { StyledButton } from '../../ui-component/button/StyledButton'
 
 // ==============================|| CHATFLOWS ||============================== //
 
@@ -206,12 +207,16 @@ const Chatflows = () => {
             {!isLoading && (!getAllChatflowsApi.data || getAllChatflowsApi.data.length === 0) && (
                 <Stack sx={{ alignItems: 'center', justifyContent: 'center' }} flexDirection='column'>
                     <Box sx={{ p: 2, height: 'auto' }}>
-                        <img style={{ objectFit: 'cover', height: '30vh', width: 'auto' }} src={WorkflowEmptySVG} alt='WorkflowEmptySVG' />
+                        <img style={{ objectFit: 'cover', height: '10vh', width: 'auto' }} src={WorkflowEmptySVG} alt='WorkflowEmptySVG' />
                     </Box>
+                    <div style={{ marginBottom: '10px' }}>
+                        Crie seu chatbot personalizado. Você pode personalizar e treinar com sua base de conhecimento
+                    </div>
                     <div>Sem nenhum Chatflow criado</div>
                 </Stack>
             )}
             <LoginDialog show={loginDialogOpen} dialogProps={loginDialogProps} onConfirm={onLoginClick} />
+            <ConfirmDialog />
         </MainCard>
     )
 }

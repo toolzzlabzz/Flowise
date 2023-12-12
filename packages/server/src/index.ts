@@ -17,7 +17,6 @@ import {
     IReactFlowNode,
     IReactFlowObject,
     INodeData,
-    IDatabaseExport,
     ICredentialReturnResponse,
     chatType,
     IChatMessage,
@@ -31,18 +30,11 @@ import {
     constructGraphs,
     resolveVariables,
     isStartNodeDependOnInput,
-    getAPIKeys,
-    addAPIKey,
-    updateAPIKey,
-    deleteAPIKey,
-    compareKeys,
     mapMimeTypeToInputField,
     findAvailableConfigs,
     isSameOverrideConfig,
-    replaceAllAPIKeys,
     isFlowValidForStream,
     databaseEntities,
-    getApiKey,
     transformToCredentialEntity,
     decryptCredentialData,
     clearAllSessionMemory,
@@ -50,7 +42,8 @@ import {
     getEncryptionKey,
     checkMemorySessionId,
     clearSessionMemoryFromViewMessageDialog,
-    getUserHome
+    getUserHome,
+    replaceChatHistory
 } from './utils'
 import { cloneDeep, omit, uniqWith, isEqual } from 'lodash'
 import { getDataSource } from './DataSource'
@@ -62,8 +55,13 @@ import { Tool } from './database/entities/Tool'
 import { Assistant } from './database/entities/Assistant'
 import { ChatflowPool } from './ChatflowPool'
 import { CachePool } from './CachePool'
-import { ICommonObject, INodeOptionsValue } from 'flowise-components'
+import { ICommonObject, IMessage, INodeOptionsValue } from 'flowise-components'
 import { createRateLimiter, getRateLimiter, initializeRateLimiter } from './utils/rateLimit'
+import { addAPIKey, compareKeys, deleteAPIKey, getApiKey, getAPIKeys, updateAPIKey } from './utils/apiKey'
+import { sanitizeMiddleware } from './utils/XSS'
+import axios from 'axios'
+import { Client } from 'langchainhub'
+import { parsePrompt } from './utils/hub'
 
 export class App {
     app: express.Application
@@ -121,8 +119,14 @@ export class App {
         // Allow access from *
         this.app.use(cors())
 
+        // Switch off the default 'X-Powered-By: Express' header
+        this.app.disable('x-powered-by')
+
         // Add the expressRequestLogger middleware to log all requests
         this.app.use(expressRequestLogger)
+
+        // Add the sanitizeMiddleware to guard against XSS
+        this.app.use(sanitizeMiddleware)
 
         if (process.env.FLOWISE_USERNAME && process.env.FLOWISE_PASSWORD) {
             const username = process.env.FLOWISE_USERNAME
@@ -676,12 +680,6 @@ export class App {
 
             const openai = new OpenAI({ apiKey: openAIApiKey })
             const retrievedAssistant = await openai.beta.assistants.retrieve(req.params.id)
-            const resp = await openai.files.list()
-            const existingFiles = resp.data ?? []
-
-            if (retrievedAssistant.file_ids && retrievedAssistant.file_ids.length) {
-                ;(retrievedAssistant as any).files = existingFiles.filter((file) => retrievedAssistant.file_ids.includes(file.id))
-            }
 
             return res.json(retrievedAssistant)
         })
@@ -714,102 +712,46 @@ export class App {
 
             const assistantDetails = JSON.parse(body.details)
 
-            try {
-                const credential = await this.AppDataSource.getRepository(Credential).findOneBy({
-                    id: body.credential
-                })
+            if (!assistantDetails.id) {
+                try {
+                    const credential = await this.AppDataSource.getRepository(Credential).findOneBy({
+                        id: body.credential
+                    })
 
-                if (!credential) return res.status(404).send(`Credential ${body.credential} not found`)
+                    if (!credential) return res.status(404).send(`Credential ${body.credential} not found`)
 
-                // Decrpyt credentialData
-                const decryptedCredentialData = await decryptCredentialData(credential.encryptedData)
-                const openAIApiKey = decryptedCredentialData['openAIApiKey']
-                if (!openAIApiKey) return res.status(404).send(`OpenAI ApiKey not found`)
+                    // Decrpyt credentialData
+                    const decryptedCredentialData = await decryptCredentialData(credential.encryptedData)
+                    const openAIApiKey = decryptedCredentialData['openAIApiKey']
+                    if (!openAIApiKey) return res.status(404).send(`OpenAI ApiKey not found`)
 
-                const openai = new OpenAI({ apiKey: openAIApiKey })
+                    const openai = new OpenAI({ apiKey: openAIApiKey })
 
-                let tools = []
-                if (assistantDetails.tools) {
-                    for (const tool of assistantDetails.tools ?? []) {
-                        tools.push({
-                            type: tool
-                        })
-                    }
-                }
-
-                if (assistantDetails.uploadFiles) {
-                    // Base64 strings
-                    let files: string[] = []
-                    const fileBase64 = assistantDetails.uploadFiles
-                    if (fileBase64.startsWith('[') && fileBase64.endsWith(']')) {
-                        files = JSON.parse(fileBase64)
-                    } else {
-                        files = [fileBase64]
-                    }
-
-                    const uploadedFiles = []
-                    for (const file of files) {
-                        const splitDataURI = file.split(',')
-                        const filename = splitDataURI.pop()?.split(':')[1] ?? ''
-                        const bf = Buffer.from(splitDataURI.pop() || '', 'base64')
-                        const filePath = path.join(getUserHome(), '.flowise', 'openai-assistant', filename)
-                        if (!fs.existsSync(path.join(getUserHome(), '.flowise', 'openai-assistant'))) {
-                            fs.mkdirSync(path.dirname(filePath), { recursive: true })
+                    let tools = []
+                    if (assistantDetails.tools) {
+                        for (const tool of assistantDetails.tools ?? []) {
+                            tools.push({
+                                type: tool
+                            })
                         }
-                        if (!fs.existsSync(filePath)) {
-                            fs.writeFileSync(filePath, bf)
-                        }
-
-                        const createdFile = await openai.files.create({
-                            file: fs.createReadStream(filePath),
-                            purpose: 'assistants'
-                        })
-                        uploadedFiles.push(createdFile)
-
-                        fs.unlinkSync(filePath)
                     }
-                    assistantDetails.files = [...assistantDetails.files, ...uploadedFiles]
-                }
-
-                if (!assistantDetails.id) {
                     const newAssistant = await openai.beta.assistants.create({
                         name: assistantDetails.name,
                         description: assistantDetails.description,
                         instructions: assistantDetails.instructions,
                         model: assistantDetails.model,
-                        tools,
-                        file_ids: (assistantDetails.files ?? []).map((file: OpenAI.Files.FileObject) => file.id)
+                        tools
                     })
-                    assistantDetails.id = newAssistant.id
-                } else {
-                    const retrievedAssistant = await openai.beta.assistants.retrieve(assistantDetails.id)
-                    let filteredTools = uniqWith([...retrievedAssistant.tools, ...tools], isEqual)
-                    filteredTools = filteredTools.filter((tool) => !(tool.type === 'function' && !(tool as any).function))
 
-                    await openai.beta.assistants.update(assistantDetails.id, {
-                        name: assistantDetails.name,
-                        description: assistantDetails.description ?? '',
-                        instructions: assistantDetails.instructions ?? '',
-                        model: assistantDetails.model,
-                        tools: filteredTools,
-                        file_ids: uniqWith(
-                            [
-                                ...retrievedAssistant.file_ids,
-                                ...(assistantDetails.files ?? []).map((file: OpenAI.Files.FileObject) => file.id)
-                            ],
-                            isEqual
-                        )
-                    })
+                    const newAssistantDetails = {
+                        ...assistantDetails,
+                        id: newAssistant.id
+                    }
+
+                    body.details = JSON.stringify(newAssistantDetails)
+                } catch (error) {
+                    return res.status(500).send(`Error creating new assistant: ${error}`)
                 }
-
-                const newAssistantDetails = {
-                    ...assistantDetails
-                }
-                if (newAssistantDetails.uploadFiles) delete newAssistantDetails.uploadFiles
-
-                body.details = JSON.stringify(newAssistantDetails)
-            } catch (error) {
-                return res.status(500).send(`Error creating new assistant: ${error}`)
             }
 
             const newAssistant = new Assistant()
@@ -859,62 +801,18 @@ export class App {
                         })
                     }
                 }
-
-                if (assistantDetails.uploadFiles) {
-                    // Base64 strings
-                    let files: string[] = []
-                    const fileBase64 = assistantDetails.uploadFiles
-                    if (fileBase64.startsWith('[') && fileBase64.endsWith(']')) {
-                        files = JSON.parse(fileBase64)
-                    } else {
-                        files = [fileBase64]
-                    }
-
-                    const uploadedFiles = []
-                    for (const file of files) {
-                        const splitDataURI = file.split(',')
-                        const filename = splitDataURI.pop()?.split(':')[1] ?? ''
-                        const bf = Buffer.from(splitDataURI.pop() || '', 'base64')
-                        const filePath = path.join(getUserHome(), '.flowise', 'openai-assistant', filename)
-                        if (!fs.existsSync(path.join(getUserHome(), '.flowise', 'openai-assistant'))) {
-                            fs.mkdirSync(path.dirname(filePath), { recursive: true })
-                        }
-                        if (!fs.existsSync(filePath)) {
-                            fs.writeFileSync(filePath, bf)
-                        }
-
-                        const createdFile = await openai.files.create({
-                            file: fs.createReadStream(filePath),
-                            purpose: 'assistants'
-                        })
-                        uploadedFiles.push(createdFile)
-
-                        fs.unlinkSync(filePath)
-                    }
-                    assistantDetails.files = [...assistantDetails.files, ...uploadedFiles]
-                }
-
-                const retrievedAssistant = await openai.beta.assistants.retrieve(openAIAssistantId)
-                let filteredTools = uniqWith([...retrievedAssistant.tools, ...tools], isEqual)
-                filteredTools = filteredTools.filter((tool) => !(tool.type === 'function' && !(tool as any).function))
-
                 await openai.beta.assistants.update(openAIAssistantId, {
                     name: assistantDetails.name,
                     description: assistantDetails.description,
                     instructions: assistantDetails.instructions,
                     model: assistantDetails.model,
-                    tools: filteredTools,
-                    file_ids: uniqWith(
-                        [...retrievedAssistant.file_ids, ...(assistantDetails.files ?? []).map((file: OpenAI.Files.FileObject) => file.id)],
-                        isEqual
-                    )
+                    tools
                 })
 
                 const newAssistantDetails = {
                     ...assistantDetails,
                     id: openAIAssistantId
                 }
-                if (newAssistantDetails.uploadFiles) delete newAssistantDetails.uploadFiles
 
                 const updateAssistant = new Assistant()
                 body.details = JSON.stringify(newAssistantDetails)
@@ -941,13 +839,14 @@ export class App {
             }
 
             try {
-                const assistantDetails = JSON.parse(assistant.details)
+                const body = req.body
+                const assistantDetails = JSON.parse(body.details)
 
                 const credential = await this.AppDataSource.getRepository(Credential).findOneBy({
-                    id: assistant.credential
+                    id: body.credential
                 })
 
-                if (!credential) return res.status(404).send(`Credential ${assistant.credential} not found`)
+                if (!credential) return res.status(404).send(`Credential ${body.credential} not found`)
 
                 // Decrpyt credentialData
                 const decryptedCredentialData = await decryptCredentialData(credential.encryptedData)
@@ -956,23 +855,13 @@ export class App {
 
                 const openai = new OpenAI({ apiKey: openAIApiKey })
 
+                await openai.beta.assistants.del(assistantDetails.id)
+
                 const results = await this.AppDataSource.getRepository(Assistant).delete({ id: req.params.id })
-
-                if (req.query.isDeleteBoth) await openai.beta.assistants.del(assistantDetails.id)
-
                 return res.json(results)
-            } catch (error: any) {
-                if (error.status === 404 && error.type === 'invalid_request_error') return res.send('OK')
+            } catch (error) {
                 return res.status(500).send(`Error deleting assistant: ${error}`)
             }
-        })
-
-        // Download file from assistant
-        this.app.post('/api/v1/openai-assistants-file', async (req: Request, res: Response) => {
-            const filePath = path.join(getUserHome(), '.flowise', 'openai-assistant', req.body.fileName)
-            res.setHeader('Content-Disposition', 'attachment; filename=' + path.basename(filePath))
-            const fileStream = fs.createReadStream(filePath)
-            fileStream.pipe(res)
         })
 
         // ----------------------------------------
@@ -1026,57 +915,6 @@ export class App {
         })
 
         // ----------------------------------------
-        // Export Load Chatflow & ChatMessage & Apikeys
-        // ----------------------------------------
-
-        this.app.get('/api/v1/database/export', async (req: Request, res: Response) => {
-            const chatmessages = await this.AppDataSource.getRepository(ChatMessage).find()
-            const chatflows = await this.AppDataSource.getRepository(ChatFlow).find()
-            const apikeys = await getAPIKeys()
-            const result: IDatabaseExport = {
-                chatmessages,
-                chatflows,
-                apikeys
-            }
-            return res.json(result)
-        })
-
-        this.app.post('/api/v1/database/load', async (req: Request, res: Response) => {
-            const databaseItems: IDatabaseExport = req.body
-
-            await this.AppDataSource.getRepository(ChatFlow).delete({})
-            await this.AppDataSource.getRepository(ChatMessage).delete({})
-
-            let error = ''
-
-            // Get a new query runner instance
-            const queryRunner = this.AppDataSource.createQueryRunner()
-
-            // Start a new transaction
-            await queryRunner.startTransaction()
-
-            try {
-                const chatflows: ChatFlow[] = databaseItems.chatflows
-                const chatmessages: ChatMessage[] = databaseItems.chatmessages
-
-                await queryRunner.manager.insert(ChatFlow, chatflows)
-                await queryRunner.manager.insert(ChatMessage, chatmessages)
-
-                await queryRunner.commitTransaction()
-            } catch (err: any) {
-                error = err?.message ?? 'Error loading database'
-                await queryRunner.rollbackTransaction()
-            } finally {
-                await queryRunner.release()
-            }
-
-            await replaceAllAPIKeys(databaseItems.apikeys)
-
-            if (error) return res.status(500).send(error)
-            return res.status(201).send('OK')
-        })
-
-        // ----------------------------------------
         // Upsert
         // ----------------------------------------
 
@@ -1091,6 +929,35 @@ export class App {
 
         this.app.post('/api/v1/vector/internal-upsert/:id', async (req: Request, res: Response) => {
             await this.buildChatflow(req, res, undefined, true, true)
+        })
+
+        // ----------------------------------------
+        // Prompt from Hub
+        // ----------------------------------------
+        this.app.post('/api/v1/load-prompt', async (req: Request, res: Response) => {
+            try {
+                let hub = new Client()
+                const prompt = await hub.pull(req.body.promptName)
+                const templates = parsePrompt(prompt)
+                return res.json({ status: 'OK', prompt: req.body.promptName, templates: templates })
+            } catch (e: any) {
+                return res.json({ status: 'ERROR', prompt: req.body.promptName, error: e?.message })
+            }
+        })
+
+        this.app.post('/api/v1/prompts-list', async (req: Request, res: Response) => {
+            try {
+                const tags = req.body.tags ? `tags=${req.body.tags}` : ''
+                // Default to 100, TODO: add pagination and use offset & limit
+                const url = `https://api.hub.langchain.com/repos/?limit=100&${tags}has_commits=true&sort_field=num_likes&sort_direction=desc&is_archived=false`
+                axios.get(url).then((response) => {
+                    if (response.data.repos) {
+                        return res.json({ status: 'OK', repos: response.data.repos })
+                    }
+                })
+            } catch (e: any) {
+                return res.json({ status: 'ERROR', repos: [] })
+            }
         })
 
         // ----------------------------------------
@@ -1325,14 +1192,14 @@ export class App {
      * @param {IReactFlowEdge[]} edges
      * @returns {string | undefined}
      */
-    findMemoryLabel(nodes: IReactFlowNode[], edges: IReactFlowEdge[]): string | undefined {
+    findMemoryLabel(nodes: IReactFlowNode[], edges: IReactFlowEdge[]): IReactFlowNode | undefined {
         const memoryNodes = nodes.filter((node) => node.data.category === 'Memory')
         const memoryNodeIds = memoryNodes.map((mem) => mem.data.id)
 
         for (const edge of edges) {
             if (memoryNodeIds.includes(edge.source)) {
                 const memoryNode = nodes.find((node) => node.data.id === edge.source)
-                return memoryNode ? memoryNode.data.label : undefined
+                return memoryNode
             }
         }
         return undefined
@@ -1398,16 +1265,19 @@ export class App {
             const nodes = parsedFlowData.nodes
             const edges = parsedFlowData.edges
 
-            /*   Reuse the flow without having to rebuild (to avoid duplicated upsert, recomputation) when all these conditions met:
+            /*   Reuse the flow without having to rebuild (to avoid duplicated upsert, recomputation, reinitialization of memory) when all these conditions met:
              * - Node Data already exists in pool
              * - Still in sync (i.e the flow has not been modified since)
              * - Existing overrideConfig and new overrideConfig are the same
              * - Flow doesn't start with/contain nodes that depend on incomingInput.question
+             * - Its not an Upsert request
+             * TODO: convert overrideConfig to hash when we no longer store base64 string but filepath
              ***/
             const isFlowReusable = () => {
                 return (
                     Object.prototype.hasOwnProperty.call(this.chatflowPool.activeChatflows, chatflowid) &&
                     this.chatflowPool.activeChatflows[chatflowid].inSync &&
+                    this.chatflowPool.activeChatflows[chatflowid].endingNodeData &&
                     isSameOverrideConfig(
                         isInternal,
                         this.chatflowPool.activeChatflows[chatflowid].overrideConfig,
@@ -1419,7 +1289,7 @@ export class App {
             }
 
             if (isFlowReusable()) {
-                nodeToExecuteData = this.chatflowPool.activeChatflows[chatflowid].endingNodeData
+                nodeToExecuteData = this.chatflowPool.activeChatflows[chatflowid].endingNodeData as INodeData
                 isStreamValid = isFlowValidForStream(nodes, nodeToExecuteData)
                 logger.debug(
                     `[server]: Reuse existing chatflow ${chatflowid} with ending node ${nodeToExecuteData.label} (${nodeToExecuteData.id})`
@@ -1453,10 +1323,24 @@ export class App {
 
                 isStreamValid = isFlowValidForStream(nodes, endingNodeData)
 
+                let chatHistory: IMessage[] | string = incomingInput.history
+                if (
+                    endingNodeData.inputs?.memory &&
+                    !incomingInput.history &&
+                    (incomingInput.chatId || incomingInput.overrideConfig?.sessionId)
+                ) {
+                    const memoryNodeId = endingNodeData.inputs?.memory.split('.')[0].replace('{{', '')
+                    const memoryNode = nodes.find((node) => node.data.id === memoryNodeId)
+                    if (memoryNode) {
+                        chatHistory = await replaceChatHistory(memoryNode, incomingInput, this.AppDataSource, databaseEntities, logger)
+                    }
+                }
+
                 /*** Get Starting Nodes with Non-Directed Graph ***/
                 const constructedObj = constructGraphs(nodes, edges, true)
                 const nonDirectedGraph = constructedObj.graph
                 const { startingNodeIds, depthQueue } = getStartingNodes(nonDirectedGraph, endingNodeId)
+                const startingNodes = nodes.filter((nd) => startingNodeIds.includes(nd.id))
 
                 logger.debug(`[server]: Start building chatflow ${chatflowid}`)
                 /*** BFS to traverse from Starting Nodes to Ending Node ***/
@@ -1467,7 +1351,7 @@ export class App {
                     depthQueue,
                     this.nodesPool.componentNodes,
                     incomingInput.question,
-                    incomingInput.history,
+                    chatHistory,
                     chatId,
                     chatflowid,
                     this.AppDataSource,
@@ -1476,22 +1360,26 @@ export class App {
                     isUpsert,
                     incomingInput.stopNodeId
                 )
-                if (isUpsert) return res.status(201).send('Successfully Upserted')
+                if (isUpsert) {
+                    this.chatflowPool.add(chatflowid, undefined, startingNodes, incomingInput?.overrideConfig)
+                    return res.status(201).send('Successfully Upserted')
+                }
 
                 const nodeToExecute = reactFlowNodes.find((node: IReactFlowNode) => node.id === endingNodeId)
                 if (!nodeToExecute) return res.status(404).send(`Node ${endingNodeId} not found`)
 
-                if (incomingInput.overrideConfig)
+                if (incomingInput.overrideConfig) {
                     nodeToExecute.data = replaceInputsWithConfig(nodeToExecute.data, incomingInput.overrideConfig)
+                }
+
                 const reactFlowNodeData: INodeData = resolveVariables(
                     nodeToExecute.data,
                     reactFlowNodes,
                     incomingInput.question,
-                    incomingInput.history
+                    chatHistory
                 )
                 nodeToExecuteData = reactFlowNodeData
 
-                const startingNodes = nodes.filter((nd) => startingNodeIds.includes(nd.id))
                 this.chatflowPool.add(chatflowid, nodeToExecuteData, startingNodes, incomingInput?.overrideConfig)
             }
 
@@ -1504,11 +1392,18 @@ export class App {
             let sessionId = undefined
             if (nodeToExecuteData.instance) sessionId = checkMemorySessionId(nodeToExecuteData.instance, chatId)
 
-            const memoryType = this.findMemoryLabel(nodes, edges)
+            const memoryNode = this.findMemoryLabel(nodes, edges)
+            const memoryType = memoryNode?.data.label
+
+            let chatHistory: IMessage[] | string = incomingInput.history
+            if (memoryNode && !incomingInput.history && (incomingInput.chatId || incomingInput.overrideConfig?.sessionId)) {
+                chatHistory = await replaceChatHistory(memoryNode, incomingInput, this.AppDataSource, databaseEntities, logger)
+            }
 
             let result = isStreamValid
                 ? await nodeInstance.run(nodeToExecuteData, incomingInput.question, {
-                      chatHistory: incomingInput.history,
+                      chatflowid,
+                      chatHistory,
                       socketIO,
                       socketIOClientId: incomingInput.socketIOClientId,
                       logger,
@@ -1518,7 +1413,8 @@ export class App {
                       chatId
                   })
                 : await nodeInstance.run(nodeToExecuteData, incomingInput.question, {
-                      chatHistory: incomingInput.history,
+                      chatflowid,
+                      chatHistory,
                       logger,
                       appDataSource: this.AppDataSource,
                       databaseEntities,
