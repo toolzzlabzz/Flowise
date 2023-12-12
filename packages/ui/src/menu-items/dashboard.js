@@ -1,8 +1,8 @@
 // assets
-import { IconHierarchy, IconBuildingStore, IconKey, IconTool, IconLock, IconRobot } from '@tabler/icons'
+import { IconHierarchy, IconBuildingStore, IconKey, IconTool, IconLock, IconTemplate } from '@tabler/icons'
 
 // constant
-const icons = { IconHierarchy, IconBuildingStore, IconKey, IconTool, IconLock, IconRobot }
+const icons = { IconHierarchy, IconBooks, IconBuildingStore, IconKey, IconTool, IconLock, IconTemplate, IconPlug, IconRobot }
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -13,6 +13,14 @@ const dashboard = {
     children: [
         {
             id: 'chatflows',
+            title: 'Datasets',
+            type: 'item',
+            url: '/chatflows',
+            icon: icons.IconBooks,
+            breadcrumbs: true
+        },
+        {
+            id: 'chatflows',
             title: 'Chatflows',
             type: 'item',
             url: '/chatflows',
@@ -21,18 +29,18 @@ const dashboard = {
         },
         {
             id: 'marketplaces',
-            title: 'Marketplaces',
+            title: 'Templates',
             type: 'item',
             url: '/marketplaces',
-            icon: icons.IconBuildingStore,
+            icon: icons.IconTemplate,
             breadcrumbs: true
         },
         {
             id: 'tools',
-            title: 'Tools',
+            title: 'Plugins',
             type: 'item',
             url: '/tools',
-            icon: icons.IconTool,
+            icon: icons.IconPlug,
             breadcrumbs: true
         },
         {
@@ -45,7 +53,7 @@ const dashboard = {
         },
         {
             id: 'credentials',
-            title: 'Credentials',
+            title: 'Credenciais',
             type: 'item',
             url: '/credentials',
             icon: icons.IconLock,
@@ -53,7 +61,7 @@ const dashboard = {
         },
         {
             id: 'apikey',
-            title: 'API Keys',
+            title: 'Chaves API',
             type: 'item',
             url: '/apikey',
             icon: icons.IconKey,
