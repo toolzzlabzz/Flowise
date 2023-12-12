@@ -1,6 +1,5 @@
 {
     "description": "Use o histórico de bate-papo para reformular a pergunta do usuário e responder à pergunta reformulada usando documentos recuperados do armazenamento de vetores",
-    "badge": "POPULAR",
     "nodes": [
         {
             "width": 300,
