@@ -22,7 +22,7 @@ class OpenSearch_Existing_VectorStores implements INode {
         this.name = 'openSearchExistingIndex'
         this.version = 1.0
         this.type = 'OpenSearch'
-        this.icon = 'opensearch.png'
+        this.icon = 'opensearch.svg'
         this.category = 'Vector Stores'
         this.description = 'Carregar o índice existente do OpenSearch (ou seja: o documento foi atualizado)'
         this.baseClasses = [this.type, 'VectorStoreRetriever', 'BaseRetriever']

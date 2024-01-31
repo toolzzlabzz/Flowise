@@ -20,7 +20,7 @@ class OpenApiChain_Chains implements INode {
         this.name = 'openApiChain'
         this.version = 1.0
         this.type = 'OpenAPIChain'
-        this.icon = 'openapi.png'
+        this.icon = 'openapi.svg'
         this.category = 'Chains'
         this.description = 'Cadeia que seleciona e chama APIs automaticamente com base apenas em uma especificação OpenAPI'
         this.baseClasses = [this.type, ...getBaseClasses(APIChain)]

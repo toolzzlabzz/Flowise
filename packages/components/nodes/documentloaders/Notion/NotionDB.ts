@@ -20,7 +20,7 @@ class NotionDB_DocumentLoaders implements INode {
         this.name = 'notionDB'
         this.version = 1.0
         this.type = 'Document'
-        this.icon = 'notion.png'
+        this.icon = 'notion-db.svg'
         this.category = 'Document Loaders'
         this.description =
             'Carregar dados de um Notion Database (cada linha é um documento separado com todas as propriedades como metadados)'
@@ -67,6 +67,10 @@ class NotionDB_DocumentLoaders implements INode {
                 auth: notionIntegrationToken
             },
             id: databaseId,
+            callerOptions: {
+                maxConcurrency: 64 // Default value
+            },
+            propertiesAsHeader: true, // Prepends a front matter header of the page properties to the page contents
             type: 'database'
         }
         const loader = new NotionAPILoader(obj)

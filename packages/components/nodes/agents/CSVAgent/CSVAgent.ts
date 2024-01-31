@@ -23,7 +23,7 @@ class CSV_Agents implements INode {
         this.version = 1.0
         this.type = 'AgentExecutor'
         this.category = 'Agents'
-        this.icon = 'csvagent.png'
+        this.icon = 'CSVagent.svg'
         this.description = 'Agente costumava responder a consultas sobre dados CSV'
         this.baseClasses = [this.type, ...getBaseClasses(AgentExecutor)]
         this.inputs = [

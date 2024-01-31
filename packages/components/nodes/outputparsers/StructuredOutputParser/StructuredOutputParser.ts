@@ -22,7 +22,7 @@ class StructuredOutputParser implements INode {
         this.version = 1.0
         this.type = 'StructuredOutputParser'
         this.description = 'Formatar a saída de uma chamada ao modelo de linguagem em uma estrutura especificada (JSON).'
-        this.icon = 'structure.png'
+        this.icon = 'structure.svg'
         this.category = CATEGORY
         this.baseClasses = [this.type, ...getBaseClasses(BaseOutputParser)]
         this.inputs = [

@@ -20,7 +20,7 @@ class InMemoryCache implements INode {
         this.version = 1.0
         this.type = 'InMemoryCache'
         this.description = 'Armazene em memoria o cache da resposta do LLM, sera limpo quando o app for reiniciado'
-        this.icon = 'inmemorycache.png'
+        this.icon = 'Memory.svg'
         this.category = 'Cache'
         this.baseClasses = [this.type, ...getBaseClasses(InMemoryCacheExtended)]
         this.inputs = []

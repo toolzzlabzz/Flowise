@@ -20,7 +20,7 @@ class ChatGooglePaLM_ChatModels implements INode {
         this.name = 'chatGooglePaLM'
         this.version = 2.0
         this.type = 'ChatGooglePaLM'
-        this.icon = 'Google_PaLM_Logo.svg'
+        this.icon = 'GooglePaLM.svg'
         this.category = 'Chat Models'
         this.description = 'Wrapper em torno dos modelos de linguagem grande do Google MakerSuite PaLM usando o Chat endpoint'
         this.baseClasses = [this.type, ...getBaseClasses(ChatGooglePaLM)]

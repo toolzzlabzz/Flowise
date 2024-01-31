@@ -21,7 +21,7 @@ class InMemoryEmbeddingCache implements INode {
         this.version = 1.0
         this.type = 'InMemoryEmbeddingCache'
         this.description = 'Armazenar em Cache as Incorporações Geradas na Memória para Evitar a Necessidade de Recomputá-las.'
-        this.icon = 'inmemorycache.png'
+        this.icon = 'Memory.svg'
         this.category = 'Cache'
         this.baseClasses = [this.type, ...getBaseClasses(CacheBackedEmbeddings)]
         this.inputs = [

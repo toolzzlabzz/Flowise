@@ -29,7 +29,7 @@ class AutoGPT_Agents implements INode {
         this.version = 1.0
         this.type = 'AutoGPT'
         this.category = 'Agents'
-        this.icon = 'autogpt.png'
+        this.icon = 'autogpt.svg'
         this.description = 'Agente autônomo com cadeia de pensamentos para conclusão de tarefas autoguiada'
         this.baseClasses = ['AutoGPT']
         this.inputs = [
