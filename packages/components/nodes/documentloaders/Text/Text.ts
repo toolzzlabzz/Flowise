@@ -21,7 +21,7 @@ class Text_DocumentLoaders implements INode {
         this.name = 'textFile'
         this.version = 3.0
         this.type = 'Document'
-        this.icon = 'textFile.svg'
+        this.icon = 'Txt.svg'
         this.category = 'Document Loaders'
         this.description = `Carregar dados de arquivos de texto`
         this.baseClasses = [this.type]

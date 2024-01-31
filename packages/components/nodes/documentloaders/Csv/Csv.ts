@@ -18,7 +18,7 @@ class Csv_DocumentLoaders implements INode {
         this.name = 'csvFile'
         this.version = 1.0
         this.type = 'Document'
-        this.icon = 'Csv.png'
+        this.icon = 'csv.svg'
         this.category = 'Document Loaders'
         this.description = `Carregar dados de arquivos CSV`
         this.baseClasses = [this.type]

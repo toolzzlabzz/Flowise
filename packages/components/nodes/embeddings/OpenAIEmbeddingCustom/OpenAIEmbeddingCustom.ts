@@ -19,7 +19,7 @@ class OpenAIEmbeddingCustom_Embeddings implements INode {
         this.name = 'openAIEmbeddingsCustom'
         this.version = 1.0
         this.type = 'OpenAIEmbeddingsCustom'
-        this.icon = 'openai.png'
+        this.icon = 'openai.svg'
         this.category = 'Embeddings'
         this.description = 'API da OpenAI para gerar representações para um texto específico'
         this.baseClasses = [this.type, ...getBaseClasses(OpenAIEmbeddings)]

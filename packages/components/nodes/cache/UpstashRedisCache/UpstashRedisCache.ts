@@ -19,7 +19,7 @@ class UpstashRedisCache implements INode {
         this.version = 1.0
         this.type = 'UpstashRedisCache'
         this.description = 'Armazene em Cache a Resposta do Modelo de Linguagem no Upstash Redis, Dados Sem Servidor para Redis e Kafka'
-        this.icon = 'upstash.png'
+        this.icon = 'Upstash.svg'
         this.category = 'Cache'
         this.baseClasses = [this.type, ...getBaseClasses(LangchainUpstashRedisCache)]
         this.credential = {

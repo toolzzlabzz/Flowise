@@ -18,7 +18,7 @@ class NotionFolder_DocumentLoaders implements INode {
         this.name = 'notionFolder'
         this.version = 1.0
         this.type = 'Document'
-        this.icon = 'notion.png'
+        this.icon = 'notion-folder.svg'
         this.category = 'Document Loaders'
         this.description = 'Carregar dados da pasta Notion exportada e descompactada'
         this.baseClasses = [this.type]
