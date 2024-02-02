@@ -107,7 +107,7 @@ class VectaraExisting_VectorStores implements INode {
             apiKey: apiKey,
             customerId: customerId,
             corpusId: corpusId,
-            source: 'flowise'
+            source: 'toolzz'
         }
 
         const vectaraFilter: VectaraFilter = {}

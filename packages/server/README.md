@@ -43,25 +43,25 @@ npx flowise start --PORT=3000 --DEBUG=true
 
 ## 📖 Documentation
 
-[Flowise Docs](https://docs.flowiseai.com/)
+[Flowise Docs](https://toolz.ai/)
 
 ## 🌐 Self Host
 
-### [Railway](https://docs.flowiseai.com/deployment/railway)
+### [Railway](https://toolz.ai/deployment/railway)
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/YK7J0v)
 
-### [Render](https://docs.flowiseai.com/deployment/render)
+### [Render](https://toolz.ai/deployment/render)
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://docs.flowiseai.com/deployment/render)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://toolz.ai/deployment/render)
 
-### [AWS](https://docs.flowiseai.com/deployment/aws)
+### [AWS](https://toolz.ai/deployment/aws)
 
-### [Azure](https://docs.flowiseai.com/deployment/azure)
+### [Azure](https://toolz.ai/deployment/azure)
 
-### [DigitalOcean](https://docs.flowiseai.com/deployment/digital-ocean)
+### [DigitalOcean](https://toolz.ai/deployment/digital-ocean)
 
-### [GCP](https://docs.flowiseai.com/deployment/gcp)
+### [GCP](https://toolz.ai/deployment/gcp)
 
 ## 💻 Cloud Hosted
 

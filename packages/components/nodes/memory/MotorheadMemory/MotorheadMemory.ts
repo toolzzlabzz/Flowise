@@ -51,8 +51,7 @@ class MotorMemory_Memory implements INode {
                 label: 'Session Id',
                 name: 'sessionId',
                 type: 'string',
-                description:
-                    'If not specified, a random id will be used. Learn <a target="_blank" href="https://docs.flowiseai.com/memory/long-term-memory#ui-and-embedded-chat">more</a>',
+                description: 'If not specified, a random id will be used. Learn <a target="_blank" href="https://toolz.ai">more</a>',
                 default: '',
                 additionalParams: true,
                 optional: true

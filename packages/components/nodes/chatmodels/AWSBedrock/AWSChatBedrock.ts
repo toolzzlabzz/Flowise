@@ -5,13 +5,6 @@ import { BaseBedrockInput } from 'langchain/dist/util/bedrock'
 import { BaseCache } from 'langchain/schema'
 import { BaseChatModelParams } from 'langchain/chat_models/base'
 
-/**
- * I had to run the following to build the component
- * and get the icon copied over to the dist directory
- * Flowise/packages/components > yarn build
- *
- * @author Michael Connor <mlconnor@yahoo.com>
- */
 class AWSChatBedrock_ChatModels implements INode {
     label: string
     name: string

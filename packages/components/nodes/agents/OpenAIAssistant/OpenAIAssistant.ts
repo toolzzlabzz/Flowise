@@ -398,7 +398,7 @@ class OpenAIAssistant_Agents implements INode {
                         const message_content = content.text
                         const annotations = message_content.annotations
 
-                        const dirPath = path.join(getUserHome(), '.flowise', 'openai-assistant')
+                        const dirPath = path.join(getUserHome(), '.toolz', 'openai-assistant')
 
                         // Iterate over the annotations
                         for (let index = 0; index < annotations.length; index++) {
@@ -412,7 +412,7 @@ class OpenAIAssistant_Agents implements INode {
                                 const cited_file = await openai.files.retrieve(file_citation.file_id)
                                 // eslint-disable-next-line no-useless-escape
                                 const fileName = cited_file.filename.split(/[\/\\]/).pop() ?? cited_file.filename
-                                filePath = path.join(getUserHome(), '.flowise', 'openai-assistant', fileName)
+                                filePath = path.join(getUserHome(), '.toolz', 'openai-assistant', fileName)
                                 if (!disableFileDownload) {
                                     await downloadFile(cited_file, filePath, dirPath, openAIApiKey)
                                     fileAnnotations.push({
@@ -426,7 +426,7 @@ class OpenAIAssistant_Agents implements INode {
                                     const cited_file = await openai.files.retrieve(file_path.file_id)
                                     // eslint-disable-next-line no-useless-escape
                                     const fileName = cited_file.filename.split(/[\/\\]/).pop() ?? cited_file.filename
-                                    filePath = path.join(getUserHome(), '.flowise', 'openai-assistant', fileName)
+                                    filePath = path.join(getUserHome(), '.toolz', 'openai-assistant', fileName)
                                     if (!disableFileDownload) {
                                         await downloadFile(cited_file, filePath, dirPath, openAIApiKey)
                                         fileAnnotations.push({
@@ -455,8 +455,8 @@ class OpenAIAssistant_Agents implements INode {
                     const content = assistantMessages[0].content[i] as MessageContentImageFile
                     const fileId = content.image_file.file_id
                     const fileObj = await openai.files.retrieve(fileId)
-                    const dirPath = path.join(getUserHome(), '.flowise', 'openai-assistant')
-                    const filePath = path.join(getUserHome(), '.flowise', 'openai-assistant', `${fileObj.filename}.png`)
+                    const dirPath = path.join(getUserHome(), '.toolz', 'openai-assistant')
+                    const filePath = path.join(getUserHome(), '.toolz', 'openai-assistant', `${fileObj.filename}.png`)
 
                     await downloadImg(openai, fileId, filePath, dirPath)
 

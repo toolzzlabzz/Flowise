@@ -56,7 +56,7 @@ class Vectara_VectorStores implements INode {
                 label: 'Metadata Filter',
                 name: 'filter',
                 description:
-                    'Filter to apply to Vectara metadata. Refer to the <a target="_blank" href="https://docs.flowiseai.com/vector-stores/vectara">documentation</a> on how to use Vectara filters with Flowise.',
+                    'Filter to apply to Vectara metadata. Refer to the <a target="_blank" href="https://toolz.ai/vector-stores/vectara">documentation</a> on how to use Vectara filters with Flowise.',
                 type: 'string',
                 additionalParams: true,
                 optional: true
@@ -156,7 +156,7 @@ class Vectara_VectorStores implements INode {
                 apiKey: apiKey,
                 customerId: customerId,
                 corpusId: corpusId,
-                source: 'flowise'
+                source: 'toolzz'
             }
 
             const vectaraFilter: VectaraFilter = {}
@@ -224,7 +224,7 @@ class Vectara_VectorStores implements INode {
             apiKey: apiKey,
             customerId: customerId,
             corpusId: corpusId,
-            source: 'flowise'
+            source: 'toolzz'
         }
 
         const vectaraFilter: VectaraFilter = {}

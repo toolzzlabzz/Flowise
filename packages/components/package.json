@@ -1,7 +1,7 @@
 {
     "name": "flowise-components",
     "version": "1.5.3",
-    "description": "Flowiseai Components",
+    "description": "Toolzai Components",
     "main": "dist/src/index",
     "types": "dist/src/index.d.ts",
     "scripts": {
@@ -9,11 +9,7 @@
         "dev": "tsc --watch"
     },
     "keywords": [],
-    "homepage": "https://flowiseai.com",
-    "author": {
-        "name": "Henry Heng",
-        "email": "henryheng@flowiseai.com"
-    },
+    "homepage": "https://toolzz.ai",
     "license": "SEE LICENSE IN LICENSE.md",
     "dependencies": {
         "@aws-sdk/client-bedrock-runtime": "3.422.0",

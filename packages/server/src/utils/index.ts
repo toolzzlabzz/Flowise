@@ -877,7 +877,7 @@ export const getEncryptionKey = async (): Promise<string> => {
         const encryptKey = generateEncryptKey()
         const defaultLocation = process.env.SECRETKEY_PATH
             ? path.join(process.env.SECRETKEY_PATH, 'encryption.key')
-            : path.join(getUserHome(), '.flowise', 'encryption.key')
+            : path.join(getUserHome(), '.toolz', 'encryption.key')
         await fs.promises.writeFile(defaultLocation, encryptKey)
         return encryptKey
     }
@@ -1107,7 +1107,7 @@ export const getTelemetryFlowObj = (nodes: IReactFlowNode[], edges: IReactFlowEd
  */
 export const getUserSettingsFilePath = () => {
     if (process.env.SECRETKEY_PATH) return path.join(process.env.SECRETKEY_PATH, 'settings.json')
-    const checkPaths = [path.join(getUserHome(), '.flowise', 'settings.json')]
+    const checkPaths = [path.join(getUserHome(), '.toolz', 'settings.json')]
     for (const checkPath of checkPaths) {
         if (fs.existsSync(checkPath)) {
             return checkPath

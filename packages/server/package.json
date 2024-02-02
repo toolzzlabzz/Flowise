@@ -1,7 +1,7 @@
 {
     "name": "flowise",
     "version": "1.4.12",
-    "description": "Flowiseai Server",
+    "description": "Toolzai Server",
     "main": "dist/index",
     "types": "dist/index.d.ts",
     "bin": {
@@ -35,11 +35,7 @@
         "version": "oclif readme && git add README.md"
     },
     "keywords": [],
-    "homepage": "https://flowiseai.com",
-    "author": {
-        "name": "Henry Heng",
-        "email": "henryheng@flowiseai.com"
-    },
+    "homepage": "https://toolzz.ai",
     "engines": {
         "node": ">=18.15.0"
     },

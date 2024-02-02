@@ -2,11 +2,7 @@
     "name": "flowise-ui",
     "version": "1.4.9",
     "license": "SEE LICENSE IN LICENSE.md",
-    "homepage": "https://flowiseai.com",
-    "author": {
-        "name": "HenryHeng",
-        "email": "henryheng@flowiseai.com"
-    },
+    "homepage": "https://toolzz.ai",
     "dependencies": {
         "@codemirror/lang-javascript": "^6.2.1",
         "@codemirror/lang-json": "^6.0.1",

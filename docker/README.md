@@ -32,4 +32,4 @@ If you like to persist your data (flows, logs, apikeys, credentials), set these 
 -   LOG_PATH=/root/.flowise/logs
 -   SECRETKEY_PATH=/root/.flowise
 
-Flowise also support different environment variables to configure your instance. Read [more](https://docs.flowiseai.com/environment-variables)
+Flowise also support different environment variables to configure your instance. Read [more](https://toolz.ai/environment-variables)

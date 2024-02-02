@@ -119,11 +119,6 @@ class LLMChain_Chains implements INode {
                 finalRes = (res as ICommonObject).json
             }
 
-            /**
-             * Apply string transformation to convert special chars:
-             * FROM: hello i am ben\n\n\thow are you?
-             * TO: hello i am benFLOWISE_NEWLINEFLOWISE_NEWLINEFLOWISE_TABhow are you?
-             */
             return handleEscapeCharacters(finalRes, false)
         }
     }
@@ -161,11 +156,6 @@ const runPrediction = async (
     const socketIO = isStreaming ? options.socketIO : undefined
     const socketIOClientId = isStreaming ? options.socketIOClientId : ''
     const moderations = nodeData.inputs?.inputModeration as Moderation[]
-    /**
-     * Apply string transformation to reverse converted special chars:
-     * FROM: { "value": "hello i am benFLOWISE_NEWLINEFLOWISE_NEWLINEFLOWISE_TABhow are you?" }
-     * TO: { "value": "hello i am ben\n\n\thow are you?" }
-     */
     const promptValues = handleEscapeCharacters(promptValuesRaw, true)
 
     if (moderations && moderations.length > 0) {

@@ -12,13 +12,13 @@ let appDataSource: DataSource
 
 export const init = async (): Promise<void> => {
     let homePath
-    let flowisePath = path.join(getUserHome(), '.flowise')
-    if (!fs.existsSync(flowisePath)) {
-        fs.mkdirSync(flowisePath)
+    let toolzzPath = path.join(getUserHome(), '.toolz')
+    if (!fs.existsSync(toolzzPath)) {
+        fs.mkdirSync(toolzzPath)
     }
     switch (process.env.DATABASE_TYPE) {
         case 'sqlite':
-            homePath = process.env.DATABASE_PATH ?? flowisePath
+            homePath = process.env.DATABASE_PATH ?? toolzzPath
             appDataSource = new DataSource({
                 type: 'sqlite',
                 database: path.resolve(homePath, 'database.sqlite'),
@@ -70,7 +70,7 @@ export const init = async (): Promise<void> => {
             })
             break
         default:
-            homePath = process.env.DATABASE_PATH ?? flowisePath
+            homePath = process.env.DATABASE_PATH ?? toolzzPath
             appDataSource = new DataSource({
                 type: 'sqlite',
                 database: path.resolve(homePath, 'database.sqlite'),
