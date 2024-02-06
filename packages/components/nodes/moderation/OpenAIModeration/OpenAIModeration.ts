@@ -20,7 +20,7 @@ class OpenAIModeration implements INode {
         this.name = 'inputModerationOpenAI'
         this.version = 1.0
         this.type = 'Moderation'
-        this.icon = 'openai.png'
+        this.icon = 'openai.svg'
         this.category = 'Moderation'
         this.description = 'Verificar se o conteúdo está em conformidade com as políticas de uso da OpenAI.'
         this.baseClasses = [this.type, ...getBaseClasses(Moderation)]

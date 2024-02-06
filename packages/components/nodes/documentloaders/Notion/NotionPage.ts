@@ -20,7 +20,7 @@ class NotionPage_DocumentLoaders implements INode {
         this.name = 'notionPage'
         this.version = 1.0
         this.type = 'Document'
-        this.icon = 'notion.png'
+        this.icon = 'notion-page.svg'
         this.category = 'Document Loaders'
         this.description = 'Carregar dados da Notion Page (incluindo páginas secundárias, todas como documentos separados)'
         this.baseClasses = [this.type]
