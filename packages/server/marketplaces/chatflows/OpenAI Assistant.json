@@ -1,5 +1,7 @@
 {
-    "description": "Assistente da OpenAI com instruções que pode utilizar modelos, ferramentas e conhecimento para responder às perguntas dos usuários",
+    "description": "Assistente da OpenAI com instruções que pode utilizar modelos, ferramentas e conhecimento para responder às perguntas dos usuário",
+    "categories": "Custom Tool, SerpAPI,OpenAI Assistant,Calculator Tool,Langchain",
+    "framework": "Langchain",
     "badge": "NEW",
     "nodes": [
         {

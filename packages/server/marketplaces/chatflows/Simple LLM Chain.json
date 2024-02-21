@@ -1,5 +1,7 @@
 {
     "description": "Tradução de idiomas usando LLM Chain com modelo de prompt de bate-papo e modelo de bate-papo",
+    "categories": "OpenAI,LLM Chain,Langchain",
+    "framework": "Langchain",
     "nodes": [
         {
             "width": 300,
