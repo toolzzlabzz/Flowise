@@ -1,5 +1,7 @@
 {
     "description": "Um agente que usa a funcionalidade Function Calling da OpenAI para escolher a ferramenta e os argumentos para chamar",
+    "categories": "Buffer Memory,Custom Tool, SerpAPI,OpenAI Function,Calculator Tool,ChatOpenAI,Langchain",
+    "framework": "Langchain",
     "nodes": [
         {
             "width": 300,
@@ -279,7 +281,7 @@
             "data": {
                 "id": "chatOpenAI_0",
                 "label": "ChatOpenAI",
-                "version": 3,
+                "version": 4,
                 "name": "chatOpenAI",
                 "type": "ChatOpenAI",
                 "baseClasses": ["ChatOpenAI", "BaseChatModel", "BaseLanguageModel"],
@@ -315,6 +317,10 @@
                                 "name": "gpt-4-1106-preview"
                             },
                             {
+                                "label": "gpt-4-1106-vision-preview",
+                                "name": "gpt-4-1106-vision-preview"
+                            },
+                            {
                                 "label": "gpt-4-vision-preview",
                                 "name": "gpt-4-vision-preview"
                             },
@@ -333,6 +339,10 @@
                             {
                                 "label": "gpt-3.5-turbo",
                                 "name": "gpt-3.5-turbo"
+                            },
+                            {
+                                "label": "gpt-3.5-turbo-0125",
+                                "name": "gpt-3.5-turbo-0125"
                             },
                             {
                                 "label": "gpt-3.5-turbo-1106",

@@ -10,7 +10,7 @@ import logger from './utils/logger'
 import { expressRequestLogger } from './utils/logger'
 import { v4 as uuidv4 } from 'uuid'
 import OpenAI from 'openai'
-import { Between, IsNull, FindOptionsWhere } from 'typeorm'
+import { FindOptionsWhere, MoreThanOrEqual, LessThanOrEqual } from 'typeorm'
 import {
     IChatFlow,
     IncomingInput,
@@ -26,7 +26,7 @@ import {
 import {
     getNodeModulesPackagePath,
     getStartingNodes,
-    buildLangchain,
+    buildFlow,
     getEndingNodes,
     constructGraphs,
     resolveVariables,
@@ -120,8 +120,9 @@ export class App {
 
     async config(socketIO?: Server) {
         // Limit is needed to allow sending/receiving base64 encoded string
-        this.app.use(express.json({ limit: '50mb' }))
-        this.app.use(express.urlencoded({ limit: '50mb', extended: true }))
+        const flowise_file_size_limit = process.env.FLOWISE_FILE_SIZE_LIMIT ?? '50mb'
+        this.app.use(express.json({ limit: flowise_file_size_limit }))
+        this.app.use(express.urlencoded({ limit: flowise_file_size_limit, extended: true }))
 
         if (process.env.NUMBER_OF_PROXIES && parseInt(process.env.NUMBER_OF_PROXIES) > 0)
             this.app.set('trust proxy', parseInt(process.env.NUMBER_OF_PROXIES))
@@ -184,7 +185,7 @@ export class App {
         this.app.get('/api/v1/ip', (request, response) => {
             response.send({
                 ip: request.ip,
-                msg: 'See the returned IP address in the response. If it matches your current IP address ( which you can get by going to http://ip.nfriedly.com/ or https://api.ipify.org/ ), then the number of proxies is correct and the rate limiter should now work correctly. If not, increase the number of proxies by 1 until the IP address matches your own.'
+                msg: 'Check returned IP address in the response. If it matches your current IP address ( which you can get by going to http://ip.nfriedly.com/ or https://api.ipify.org/ ), then the number of proxies is correct and the rate limiter should now work correctly. If not, increase the number of proxies by 1 and restart Cloud-Hosted Flowise until the IP address matches your own. Visit https://docs.flowiseai.com/configuration/rate-limit#cloud-hosted-rate-limit-setup-guide for more information.'
             })
         })
 
@@ -440,7 +441,7 @@ export class App {
             // chatFlowPool is initialized only when a flow is opened
             // if the user attempts to rename/update category without opening any flow, chatFlowPool will be undefined
             if (this.chatflowPool) {
-                // Update chatflowpool inSync to false, to build Langchain again because data has been changed
+                // Update chatflowpool inSync to false, to build flow from scratch again because data has been changed
                 this.chatflowPool.updateInSync(chatflow.id, false)
             }
 
@@ -482,7 +483,12 @@ export class App {
                 const isEndingNode = endingNodeData?.outputs?.output === 'EndingNode'
 
                 if (!isEndingNode) {
-                    if (endingNodeData && endingNodeData.category !== 'Chains' && endingNodeData.category !== 'Agents') {
+                    if (
+                        endingNodeData &&
+                        endingNodeData.category !== 'Chains' &&
+                        endingNodeData.category !== 'Agents' &&
+                        endingNodeData.category !== 'Engine'
+                    ) {
                         return res.status(500).send(`Ending node must be either a Chain or Agent`)
                     }
                 }
@@ -505,6 +511,7 @@ export class App {
             const chatId = req.query?.chatId as string | undefined
             const memoryType = req.query?.memoryType as string | undefined
             const sessionId = req.query?.sessionId as string | undefined
+            const messageId = req.query?.messageId as string | undefined
             const startDate = req.query?.startDate as string | undefined
             const endDate = req.query?.endDate as string | undefined
             let chatTypeFilter = req.query?.chatType as chatType | undefined
@@ -532,7 +539,8 @@ export class App {
                 memoryType,
                 sessionId,
                 startDate,
-                endDate
+                endDate,
+                messageId
             )
             return res.json(chatmessages)
         })
@@ -776,6 +784,12 @@ export class App {
 
             const openai = new OpenAI({ apiKey: openAIApiKey })
             const retrievedAssistant = await openai.beta.assistants.retrieve(req.params.id)
+            const resp = await openai.files.list()
+            const existingFiles = resp.data ?? []
+
+            if (retrievedAssistant.file_ids && retrievedAssistant.file_ids.length) {
+                ;(retrievedAssistant as any).files = existingFiles.filter((file) => retrievedAssistant.file_ids.includes(file.id))
+            }
 
             return res.json(retrievedAssistant)
         })
@@ -808,46 +822,102 @@ export class App {
 
             const assistantDetails = JSON.parse(body.details)
 
-            if (!assistantDetails.id) {
-                try {
-                    const credential = await this.AppDataSource.getRepository(Credential).findOneBy({
-                        id: body.credential
-                    })
+            try {
+                const credential = await this.AppDataSource.getRepository(Credential).findOneBy({
+                    id: body.credential
+                })
 
-                    if (!credential) return res.status(404).send(`Credential ${body.credential} not found`)
+                if (!credential) return res.status(404).send(`Credential ${body.credential} not found`)
 
-                    // Decrpyt credentialData
-                    const decryptedCredentialData = await decryptCredentialData(credential.encryptedData)
-                    const openAIApiKey = decryptedCredentialData['openAIApiKey']
-                    if (!openAIApiKey) return res.status(404).send(`OpenAI ApiKey not found`)
+                // Decrpyt credentialData
+                const decryptedCredentialData = await decryptCredentialData(credential.encryptedData)
+                const openAIApiKey = decryptedCredentialData['openAIApiKey']
+                if (!openAIApiKey) return res.status(404).send(`OpenAI ApiKey not found`)
 
-                    const openai = new OpenAI({ apiKey: openAIApiKey })
+                const openai = new OpenAI({ apiKey: openAIApiKey })
 
-                    let tools = []
-                    if (assistantDetails.tools) {
-                        for (const tool of assistantDetails.tools ?? []) {
-                            tools.push({
-                                type: tool
-                            })
-                        }
+                let tools = []
+                if (assistantDetails.tools) {
+                    for (const tool of assistantDetails.tools ?? []) {
+                        tools.push({
+                            type: tool
+                        })
                     }
+                }
+
+                if (assistantDetails.uploadFiles) {
+                    // Base64 strings
+                    let files: string[] = []
+                    const fileBase64 = assistantDetails.uploadFiles
+                    if (fileBase64.startsWith('[') && fileBase64.endsWith(']')) {
+                        files = JSON.parse(fileBase64)
+                    } else {
+                        files = [fileBase64]
+                    }
+
+                    const uploadedFiles = []
+                    for (const file of files) {
+                        const splitDataURI = file.split(',')
+                        const filename = splitDataURI.pop()?.split(':')[1] ?? ''
+                        const bf = Buffer.from(splitDataURI.pop() || '', 'base64')
+                        const filePath = path.join(getUserHome(), '.flowise', 'openai-assistant', filename)
+                        if (!fs.existsSync(path.join(getUserHome(), '.flowise', 'openai-assistant'))) {
+                            fs.mkdirSync(path.dirname(filePath), { recursive: true })
+                        }
+                        if (!fs.existsSync(filePath)) {
+                            fs.writeFileSync(filePath, bf)
+                        }
+
+                        const createdFile = await openai.files.create({
+                            file: fs.createReadStream(filePath),
+                            purpose: 'assistants'
+                        })
+                        uploadedFiles.push(createdFile)
+
+                        fs.unlinkSync(filePath)
+                    }
+                    assistantDetails.files = [...assistantDetails.files, ...uploadedFiles]
+                }
+
+                if (!assistantDetails.id) {
                     const newAssistant = await openai.beta.assistants.create({
                         name: assistantDetails.name,
                         description: assistantDetails.description,
                         instructions: assistantDetails.instructions,
                         model: assistantDetails.model,
-                        tools
+                        tools,
+                        file_ids: (assistantDetails.files ?? []).map((file: OpenAI.Files.FileObject) => file.id)
                     })
+                    assistantDetails.id = newAssistant.id
+                } else {
+                    const retrievedAssistant = await openai.beta.assistants.retrieve(assistantDetails.id)
+                    let filteredTools = uniqWith([...retrievedAssistant.tools, ...tools], isEqual)
+                    filteredTools = filteredTools.filter((tool) => !(tool.type === 'function' && !(tool as any).function))
 
-                    const newAssistantDetails = {
-                        ...assistantDetails,
-                        id: newAssistant.id
-                    }
-
-                    body.details = JSON.stringify(newAssistantDetails)
-                } catch (error) {
-                    return res.status(500).send(`Error creating new assistant: ${error}`)
+                    await openai.beta.assistants.update(assistantDetails.id, {
+                        name: assistantDetails.name,
+                        description: assistantDetails.description ?? '',
+                        instructions: assistantDetails.instructions ?? '',
+                        model: assistantDetails.model,
+                        tools: filteredTools,
+                        file_ids: uniqWith(
+                            [
+                                ...retrievedAssistant.file_ids,
+                                ...(assistantDetails.files ?? []).map((file: OpenAI.Files.FileObject) => file.id)
+                            ],
+                            isEqual
+                        )
+                    })
                 }
+
+                const newAssistantDetails = {
+                    ...assistantDetails
+                }
+                if (newAssistantDetails.uploadFiles) delete newAssistantDetails.uploadFiles
+
+                body.details = JSON.stringify(newAssistantDetails)
+            } catch (error) {
+                return res.status(500).send(`Error creating new assistant: ${error}`)
             }
 
             const newAssistant = new Assistant()
@@ -902,18 +972,62 @@ export class App {
                         })
                     }
                 }
+
+                if (assistantDetails.uploadFiles) {
+                    // Base64 strings
+                    let files: string[] = []
+                    const fileBase64 = assistantDetails.uploadFiles
+                    if (fileBase64.startsWith('[') && fileBase64.endsWith(']')) {
+                        files = JSON.parse(fileBase64)
+                    } else {
+                        files = [fileBase64]
+                    }
+
+                    const uploadedFiles = []
+                    for (const file of files) {
+                        const splitDataURI = file.split(',')
+                        const filename = splitDataURI.pop()?.split(':')[1] ?? ''
+                        const bf = Buffer.from(splitDataURI.pop() || '', 'base64')
+                        const filePath = path.join(getUserHome(), '.flowise', 'openai-assistant', filename)
+                        if (!fs.existsSync(path.join(getUserHome(), '.flowise', 'openai-assistant'))) {
+                            fs.mkdirSync(path.dirname(filePath), { recursive: true })
+                        }
+                        if (!fs.existsSync(filePath)) {
+                            fs.writeFileSync(filePath, bf)
+                        }
+
+                        const createdFile = await openai.files.create({
+                            file: fs.createReadStream(filePath),
+                            purpose: 'assistants'
+                        })
+                        uploadedFiles.push(createdFile)
+
+                        fs.unlinkSync(filePath)
+                    }
+                    assistantDetails.files = [...assistantDetails.files, ...uploadedFiles]
+                }
+
+                const retrievedAssistant = await openai.beta.assistants.retrieve(openAIAssistantId)
+                let filteredTools = uniqWith([...retrievedAssistant.tools, ...tools], isEqual)
+                filteredTools = filteredTools.filter((tool) => !(tool.type === 'function' && !(tool as any).function))
+
                 await openai.beta.assistants.update(openAIAssistantId, {
                     name: assistantDetails.name,
                     description: assistantDetails.description,
                     instructions: assistantDetails.instructions,
                     model: assistantDetails.model,
-                    tools
+                    tools: filteredTools,
+                    file_ids: uniqWith(
+                        [...retrievedAssistant.file_ids, ...(assistantDetails.files ?? []).map((file: OpenAI.Files.FileObject) => file.id)],
+                        isEqual
+                    )
                 })
 
                 const newAssistantDetails = {
                     ...assistantDetails,
                     id: openAIAssistantId
                 }
+                if (newAssistantDetails.uploadFiles) delete newAssistantDetails.uploadFiles
 
                 const updateAssistant = new Assistant()
                 body.details = JSON.stringify(newAssistantDetails)
@@ -940,14 +1054,13 @@ export class App {
             }
 
             try {
-                const body = req.body
-                const assistantDetails = JSON.parse(body.details)
+                const assistantDetails = JSON.parse(assistant.details)
 
                 const credential = await this.AppDataSource.getRepository(Credential).findOneBy({
-                    id: body.credential
+                    id: assistant.credential
                 })
 
-                if (!credential) return res.status(404).send(`Credential ${body.credential} not found`)
+                if (!credential) return res.status(404).send(`Credential ${assistant.credential} not found`)
 
                 // Decrpyt credentialData
                 const decryptedCredentialData = await decryptCredentialData(credential.encryptedData)
@@ -956,13 +1069,29 @@ export class App {
 
                 const openai = new OpenAI({ apiKey: openAIApiKey })
 
-                await openai.beta.assistants.del(assistantDetails.id)
-
                 const results = await this.AppDataSource.getRepository(Assistant).delete({ id: req.params.id })
+
+                if (req.query.isDeleteBoth) await openai.beta.assistants.del(assistantDetails.id)
+
                 return res.json(results)
-            } catch (error) {
+            } catch (error: any) {
+                if (error.status === 404 && error.type === 'invalid_request_error') return res.send('OK')
                 return res.status(500).send(`Error deleting assistant: ${error}`)
             }
+        })
+
+        // Download file from assistant
+        this.app.post('/api/v1/openai-assistants-file', async (req: Request, res: Response) => {
+            const filePath = path.join(getUserHome(), '.flowise', 'openai-assistant', req.body.fileName)
+            //raise error if file path is not absolute
+            if (!path.isAbsolute(filePath)) return res.status(500).send(`Invalid file path`)
+            //raise error if file path contains '..'
+            if (filePath.includes('..')) return res.status(500).send(`Invalid file path`)
+            //only return from the .flowise openai-assistant folder
+            if (!(filePath.includes('.flowise') && filePath.includes('openai-assistant'))) return res.status(500).send(`Invalid file path`)
+            res.setHeader('Content-Disposition', 'attachment; filename=' + path.basename(filePath))
+            const fileStream = fs.createReadStream(filePath)
+            fileStream.pipe(res)
         })
 
         // ----------------------------------------
@@ -1022,8 +1151,14 @@ export class App {
         this.app.get('/api/v1/fetch-links', async (req: Request, res: Response) => {
             const url = decodeURIComponent(req.query.url as string)
             const relativeLinksMethod = req.query.relativeLinksMethod as string
+            if (!relativeLinksMethod) {
+                return res.status(500).send('Please choose a Relative Links Method in Additional Parameters.')
+            }
+
+            const limit = parseInt(req.query.limit as string)
             if (process.env.DEBUG === 'true') console.info(`Start ${relativeLinksMethod}`)
-            const links: string[] = relativeLinksMethod === 'webCrawl' ? await webCrawl(url, 0) : await xmlScrape(url, 0)
+            const links: string[] = relativeLinksMethod === 'webCrawl' ? await webCrawl(url, limit) : await xmlScrape(url, limit)
+            if (process.env.DEBUG === 'true') console.info(`Finish ${relativeLinksMethod}`)
 
             res.json({ status: 'OK', links })
         })
@@ -1097,21 +1232,42 @@ export class App {
         // Marketplaces
         // ----------------------------------------
 
-        // Get all chatflows for marketplaces
-        this.app.get('/api/v1/marketplaces/chatflows', async (req: Request, res: Response) => {
-            const marketplaceDir = path.join(__dirname, '..', 'marketplaces', 'chatflows')
-            const jsonsInDir = fs.readdirSync(marketplaceDir).filter((file) => path.extname(file) === '.json')
-            const templates: any[] = []
+        // Get all templates for marketplaces
+        this.app.get('/api/v1/marketplaces/templates', async (req: Request, res: Response) => {
+            let marketplaceDir = path.join(__dirname, '..', 'marketplaces', 'chatflows')
+            let jsonsInDir = fs.readdirSync(marketplaceDir).filter((file) => path.extname(file) === '.json')
+            let templates: any[] = []
             jsonsInDir.forEach((file, index) => {
                 const filePath = path.join(__dirname, '..', 'marketplaces', 'chatflows', file)
                 const fileData = fs.readFileSync(filePath)
                 const fileDataObj = JSON.parse(fileData.toString())
                 const template = {
                     id: index,
-                    name: file.split('.json')[0],
+                    templateName: file.split('.json')[0],
                     flowData: fileData.toString(),
                     badge: fileDataObj?.badge,
+                    framework: fileDataObj?.framework,
+                    categories: fileDataObj?.categories,
+                    type: 'Chatflow',
                     description: fileDataObj?.description || ''
+                }
+                templates.push(template)
+            })
+
+            marketplaceDir = path.join(__dirname, '..', 'marketplaces', 'tools')
+            jsonsInDir = fs.readdirSync(marketplaceDir).filter((file) => path.extname(file) === '.json')
+            jsonsInDir.forEach((file, index) => {
+                const filePath = path.join(__dirname, '..', 'marketplaces', 'tools', file)
+                const fileData = fs.readFileSync(filePath)
+                const fileDataObj = JSON.parse(fileData.toString())
+                const template = {
+                    ...fileDataObj,
+                    id: index,
+                    type: 'Tool',
+                    framework: fileDataObj?.framework,
+                    badge: fileDataObj?.badge,
+                    categories: '',
+                    templateName: file.split('.json')[0]
                 }
                 templates.push(template)
             })
@@ -1121,26 +1277,7 @@ export class App {
                 templates.splice(FlowiseDocsQnAIndex, 1)
                 templates.unshift(FlowiseDocsQnA)
             }
-            return res.json(templates)
-        })
-
-        // Get all tools for marketplaces
-        this.app.get('/api/v1/marketplaces/tools', async (req: Request, res: Response) => {
-            const marketplaceDir = path.join(__dirname, '..', 'marketplaces', 'tools')
-            const jsonsInDir = fs.readdirSync(marketplaceDir).filter((file) => path.extname(file) === '.json')
-            const templates: any[] = []
-            jsonsInDir.forEach((file, index) => {
-                const filePath = path.join(__dirname, '..', 'marketplaces', 'tools', file)
-                const fileData = fs.readFileSync(filePath)
-                const fileDataObj = JSON.parse(fileData.toString())
-                const template = {
-                    ...fileDataObj,
-                    id: index,
-                    templateName: file.split('.json')[0]
-                }
-                templates.push(template)
-            })
-            return res.json(templates)
+            return res.json(templates.sort((a, b) => a.templateName.localeCompare(b.templateName)))
         })
 
         // ----------------------------------------
@@ -1305,22 +1442,34 @@ export class App {
         memoryType?: string,
         sessionId?: string,
         startDate?: string,
-        endDate?: string
+        endDate?: string,
+        messageId?: string
     ): Promise<ChatMessage[]> {
+        const setDateToStartOrEndOfDay = (dateTimeStr: string, setHours: 'start' | 'end') => {
+            const date = new Date(dateTimeStr)
+            if (isNaN(date.getTime())) {
+                return undefined
+            }
+            setHours === 'start' ? date.setHours(0, 0, 0, 0) : date.setHours(23, 59, 59, 999)
+            return date
+        }
+
         let fromDate
-        if (startDate) fromDate = new Date(startDate)
+        if (startDate) fromDate = setDateToStartOrEndOfDay(startDate, 'start')
 
         let toDate
-        if (endDate) toDate = new Date(endDate)
+        if (endDate) toDate = setDateToStartOrEndOfDay(endDate, 'end')
 
         return await this.AppDataSource.getRepository(ChatMessage).find({
             where: {
                 chatflowid,
                 chatType,
                 chatId,
-                memoryType: memoryType ?? (chatId ? IsNull() : undefined),
-                sessionId: sessionId ?? (chatId ? IsNull() : undefined),
-                createdDate: toDate && fromDate ? Between(fromDate, toDate) : undefined
+                memoryType: memoryType ?? undefined,
+                sessionId: sessionId ?? undefined,
+                ...(fromDate && { createdDate: MoreThanOrEqual(fromDate) }),
+                ...(toDate && { createdDate: LessThanOrEqual(toDate) }),
+                id: messageId ?? undefined
             },
             order: {
                 createdDate: sortOrder === 'DESC' ? 'DESC' : 'ASC'
@@ -1421,7 +1570,7 @@ export class App {
 
             const { startingNodeIds, depthQueue } = getStartingNodes(filteredGraph, stopNodeId)
 
-            await buildLangchain(
+            await buildFlow(
                 startingNodeIds,
                 nodes,
                 edges,
@@ -1569,7 +1718,12 @@ export class App {
                     const isEndingNode = endingNodeData?.outputs?.output === 'EndingNode'
 
                     if (!isEndingNode) {
-                        if (endingNodeData && endingNodeData.category !== 'Chains' && endingNodeData.category !== 'Agents') {
+                        if (
+                            endingNodeData &&
+                            endingNodeData.category !== 'Chains' &&
+                            endingNodeData.category !== 'Agents' &&
+                            endingNodeData.category !== 'Engine'
+                        ) {
                             return res.status(500).send(`Ending node must be either a Chain or Agent`)
                         }
 
@@ -1633,7 +1787,7 @@ export class App {
 
                 logger.debug(`[server]: Start building chatflow ${chatflowid}`)
                 /*** BFS to traverse from Starting Nodes to Ending Node ***/
-                const reactFlowNodes = await buildLangchain(
+                const reactFlowNodes = await buildFlow(
                     startingNodeIds,
                     nodes,
                     edges,

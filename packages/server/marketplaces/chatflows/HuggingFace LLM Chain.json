@@ -1,5 +1,7 @@
 {
     "description": "Cadeia LLM simples usando API de inferência HuggingFace no modelo falcon-7b-instruct",
+    "categories": "HuggingFace,LLM Chain,Langchain",
+    "framework": "Langchain",
     "nodes": [
         {
             "width": 300,

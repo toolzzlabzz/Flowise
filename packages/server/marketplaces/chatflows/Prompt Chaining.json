@@ -1,5 +1,7 @@
 {
     "description": "Use a saída de uma cadeia como prompt para outra cadeia",
+    "categories": "Custom Tool,OpenAI,LLM Chain,Langchain",
+    "framework": "Langchain",
     "nodes": [
         {
             "width": 300,

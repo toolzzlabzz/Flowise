@@ -1,5 +1,7 @@
 {
     "description": "Use a API Replicate que executa o modelo Llama 13b v2 com LLMChain",
+    "categories": "Replicate,LLM Chain,Langchain",
+    "framework": "Langchain",
     "nodes": [
         {
             "width": 300,
