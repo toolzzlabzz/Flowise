@@ -1,5 +1,6 @@
 {
     "description": "Cadeia QnA usando LLM local, modelos de incorporação e armazenamento de vetores local Faiss",
+    "badge": "POPULAR",
     "categories": "Text File,ChatOllama,Conversational Retrieval QA Chain,Faiss,Langchain",
     "framework": "Langchain",
     "nodes": [
